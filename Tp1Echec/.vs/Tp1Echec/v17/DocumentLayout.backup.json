@@ -1,0 +1,221 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\pieces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\pieces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\case.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\case.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\joueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\joueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\plateau.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\plateau.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\partie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\partie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\facademodele.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\facademodele.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\facadecontroleur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\facadecontroleur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\facadevue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\facadevue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\vueplateau.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\vueplateau.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\vuejoueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\vuejoueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\2255909\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\tp1echec\\tp1echec\\vueprincipale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\vueprincipale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Pieces.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Pieces.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Pieces.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Pieces.cs",
+              "RelativeToolTip": "Tp1Echec\\Pieces.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:30:55.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Case.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Case.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Case.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Case.cs",
+              "RelativeToolTip": "Tp1Echec\\Case.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:30:38.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Joueur.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Joueur.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Joueur.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Joueur.cs",
+              "RelativeToolTip": "Tp1Echec\\Joueur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:30:26.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Plateau.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Plateau.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Plateau.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Plateau.cs",
+              "RelativeToolTip": "Tp1Echec\\Plateau.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:30:12.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Partie.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Partie.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Partie.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Partie.cs",
+              "RelativeToolTip": "Tp1Echec\\Partie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:29:56.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FacadeModele.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeModele.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\FacadeModele.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeModele.cs",
+              "RelativeToolTip": "Tp1Echec\\FacadeModele.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:29:38.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FacadeControleur.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeControleur.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\FacadeControleur.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeControleur.cs",
+              "RelativeToolTip": "Tp1Echec\\FacadeControleur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:29:19.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FacadeVue.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeVue.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\FacadeVue.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\FacadeVue.cs",
+              "RelativeToolTip": "Tp1Echec\\FacadeVue.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:29:00.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "VuePlateau.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VuePlateau.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\VuePlateau.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VuePlateau.cs [Design]*",
+              "RelativeToolTip": "Tp1Echec\\VuePlateau.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:28:00.097Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "VueJoueur.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VueJoueur.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\VueJoueur.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VueJoueur.cs [Design]",
+              "RelativeToolTip": "Tp1Echec\\VueJoueur.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:27:50.108Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Program.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Program.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\Program.cs",
+              "RelativeToolTip": "Tp1Echec\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:22:48.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "VuePrincipale.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VuePrincipale.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\VuePrincipale.cs",
+              "ToolTip": "C:\\Users\\2255909\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\Tp1Echec\\Tp1Echec\\VuePrincipale.cs [Design]",
+              "RelativeToolTip": "Tp1Echec\\VuePrincipale.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T20:22:20.916Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
