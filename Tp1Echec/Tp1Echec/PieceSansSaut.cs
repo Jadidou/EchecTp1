@@ -6,26 +6,25 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public abstract class Pieces
+    public class PieceSansSaut : Pieces
     {
 
-        //atributs
+        //attributs
 
 
-        //constructeur
+        //contructeur
 
-        protected Pieces() { }
+        public PieceSansSaut() : base() { }
 
 
         //proprieter
-
 
 
         //methode
 
 
         //destructeur
-        ~Pieces() { }
+        ~PieceSansSaut() { }
 
     }
 }

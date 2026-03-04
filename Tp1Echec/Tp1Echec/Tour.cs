@@ -6,29 +6,25 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public class Plateau
+    public  class Tour
     {
-
-        //attribut
+        //attributs
 
 
         //constructeur
 
-        public Plateau() { }
+        public Tour() { }
+
 
         //proprieter
 
 
-        //indexeur
-
-
         //methode
 
-        //public (...) serilizationPlateau();
 
-        
+
         //destructeur
-        ~Plateau() { }
+        ~Tour() { }
 
     }
 }

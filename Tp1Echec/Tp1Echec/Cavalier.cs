@@ -6,29 +6,22 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public class Plateau
+    public class Cavalier : PieceAvecSaut
     {
 
-        //attribut
+        //attributs
 
 
         //constructeur
-
-        public Plateau() { }
+        public Cavalier() : base() { }
 
         //proprieter
 
 
-        //indexeur
-
-
         //methode
 
-        //public (...) serilizationPlateau();
-
-        
         //destructeur
-        ~Plateau() { }
+        ~Cavalier() { }
 
     }
 }

@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    internal class Joueur
+    public class Joueur
     {
+
+        //attributs
+
+
+        //constructeur
+
+        public Joueur() { }
+
+        //proprieter
+
+
+        //methode
+
+
+        //destructeur
+        ~Joueur() { }
+
     }
 }

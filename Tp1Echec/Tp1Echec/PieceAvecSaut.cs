@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public class Plateau
+    public class PieceAvecSaut : Pieces
     {
 
         //attribut
@@ -14,21 +14,17 @@ namespace Tp1Echec
 
         //constructeur
 
-        public Plateau() { }
+        public PieceAvecSaut() : base () { }
 
         //proprieter
 
 
-        //indexeur
-
-
         //methode
 
-        //public (...) serilizationPlateau();
 
-        
         //destructeur
-        ~Plateau() { }
+        ~PieceAvecSaut() { }
+
 
     }
 }

@@ -7,3 +7,12 @@ C:\Users\2255909\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObje
 C:\Users\2255909\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.csproj.CoreCompileInputs.cache
 C:\Users\2255909\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.exe
 C:\Users\2255909\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.pdb
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\bin\Debug\Tp1Echec.exe.config
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\bin\Debug\Tp1Echec.exe
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\bin\Debug\Tp1Echec.pdb
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.csproj.AssemblyReference.cache
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.Properties.Resources.resources
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.csproj.GenerateResource.cache
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.csproj.CoreCompileInputs.cache
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.exe
+C:\Users\jadel\OneDrive - Cegep de Lanaudiere\Documents\hiver2026\orienterObjet\Tp1\GitHubTp1\Tp1Echec\Tp1Echec\obj\Debug\Tp1Echec.pdb

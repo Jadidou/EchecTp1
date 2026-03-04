@@ -46,14 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Case.cs" />
-    <Compile Include="FacadeControleur.cs" />
-    <Compile Include="FacadeModele.cs" />
-    <Compile Include="FacadeVue.cs" />
+    <Compile Include="Cavalier.cs" />
+    <Compile Include="Coup.cs" />
+    <Compile Include="Dame.cs" />
+    <Compile Include="FacadeEchec.cs" />
+    <Compile Include="Fou.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Partie.cs" />
+    <Compile Include="PieceAvecSaut.cs" />
     <Compile Include="Pieces.cs" />
+    <Compile Include="PieceSansSaut.cs" />
+    <Compile Include="Pion.cs" />
     <Compile Include="Plateau.cs" />
+    <Compile Include="Roi.cs" />
+    <Compile Include="Tour.cs" />
     <Compile Include="VuePlateau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,7 +79,7 @@
       <DependentUpon>VuePrincipale.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="JeuEchec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,6 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Joueur.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

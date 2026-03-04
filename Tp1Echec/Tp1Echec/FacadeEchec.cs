@@ -6,29 +6,37 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public class Plateau
+    public class FacadeModele
     {
 
         //attribut
 
+        private List<Joueur> m_joueurList;
 
         //constructeur
 
-        public Plateau() { }
+        public FacadeModele() 
+        {
+
+            m_joueurList = new List<Joueur>();
+
+        }
+
 
         //proprieter
+
 
 
         //indexeur
 
 
+
         //methode
 
-        //public (...) serilizationPlateau();
 
-        
+
         //destructeur
-        ~Plateau() { }
+        ~FacadeModele() { }
 
     }
 }
