@@ -1,0 +1,176 @@
+Date: 2026-03-03
+
+[Laurie]
+Answer the next question as if you were a top level system design professor at McGill University. Do not give the answer , but guide me through questioning.I  need help in a OOP system design. Here is the trouble:
+We have a Plateau class which holds the position of many Pieces.
+Pieces is an abstract type which is realised in many sub types such as Pion, Roi, Dame... The problem is, when we want to verify the validity of a Coup (move), we want the pieces to simply verify: "This is a diagonal move, and I cannot move diagonally". That way, the simple verification of a wrong type of move is separated from the more complex  cases verification: "If I, a king, move to that position, I would be in harm's way which means this move is invalid" or "I, a pawn, can move forward by two because I have not moved yet.".Problem is, if we have the Plateau verify this, then it has to verify the concrete type of the Pièce. Sadly, this implementation inflates rapidly as more custom pieces are added. I wonder if a polymorphic solution exists to this problem, without the necessity of passing the entire context to each piece so it can manually check each case?Show less
+
+[IA] 19 h 22
+Good question. Let's think through this carefully.
+
+You've identified a real tension. Let me start with a foundational question:
+When a Pièce validates a Coup, what exactly does it need to know?
+Try to enumerate the different categories of information a piece might need — separate what belongs to the piece's intrinsic nature versus what belongs to the board's state.
+
+[Laurie]
+The Pièce must validate the nature of the Coup, such as, a diagonal move, a orthogonal move, an L move. Certain pieces must also know certain Pièce state information, such as, has a Pawn, a King already moved or is this its first move?On the opposite, it must be the Board that verifies contextual information.  As an example, it must be the board which verifies if a Pièce is in the way of a move. That being said, it must not be a problem if the Pièce is a Pièce that can "Jump" over other Pièces, like the knight.It still doesn't solve my issue of particular Rules of context though. It still has to be the Board which contextually checks if the King if endangered by any move, but it cannot do that unless it knows if the Piece is a king or not.
+
+[IA] 19h30
+Good. You've drawn the boundary clearly. Now let's attack your core tension directly.
+You said the Board cannot check if the King is endangered unless it knows the piece is a King. I want to challenge that assumption with a question:
+Does the Board need to know the piece is a King, or does it just need to know that this particular piece requires an endangerment check?
+In other words — who should decide that the endangerment check is necessary: the Board, or the Piece itself?
+
+[Laurie]
+I reckon it must be the Piece, but the Piece then needs to have contextual info regarding other pieces position to be able to check no?Or, a different approach, a method NecessiteVerificationDanger() is declared as Virtual in the abstract Pièce class (in C#), but also implemented there, where it responds "No". Furthermore, only the king re implements this and answers "Yes".  There, in the Board sequence, it verifies with all moves if the piece necessitates a Endangerment check, but only checks if the Pièce answers Yes. Then, it checks for danger and returns an error if the move is invalid!
+
+[IA] 19 h 37
+You're very close to something well-known. Before I confirm, let me push you further:
+Your NecessiteVerificationDanger() approach works, but consider this — what happens when you add a new piece that requires a completely new type of contextual check? For example, a piece that cannot move if it would expose another specific piece to danger?
+Each new rule would require a new method on the base class. How does that sit with you, from a design principle standpoint?
+
+[Laurie]
+I feel like this case is very common, and ALL pieces would have to verify if a surrounding piece NecessiteVerificationDanger(). Therefore, I don't personally think it would be that bad to keep my method. Unless actually novel rules are added. Could you provide an example occurrence of such a problem?
+
+[IA] 19 h 42
+Good instinct — in standard chess, you're right that the rule set is closed, so the proliferation problem is manageable.
+But here's a concrete example to stress-test your design. Imagine you add a "Garde" piece with this rule:
+
+"The Garde cannot move if the Roi is not within 2 squares of it after the move."
+
+Now you need a NecessiteVerificationProximiteRoi() method on the base class. Then you add a "Bouclier" piece:
+
+"The Bouclier cannot move if it would leave a specific allied piece unprotected."
+
+Another method. Each new piece with a unique contextual rule adds a method to your base class, which means every existing piece is now aware of a rule that has nothing to do with them.
+This violates a principle you likely know. Which one?
+And as a follow-up — rather than adding methods to the base class, what if the pieces could instead register or declare which contextual checks they require, without the base class needing to know what those checks are in advance?
+
+[Laurie]
+For the principle, I think you are referring to the Coherence principle.
+
+[IA] 19 h 45
+Close — coherence is related, but I'm pointing at something more specific. Think about SOLID principles.
+Your base class is being forced to change every time a new piece with a new rule is added.
+Which SOLID principle does that violate?
+
+[Laurie]
+Single responsability
+[IA] 19 h 45
+Not quite — Single Responsibility is about a class having only one reason to change. Think about which principle specifically governs adding new behavior without modifying existing code.
+
+[Laurie]
+Open Closed principle?
+
+[IA] 19 h 47
+Exactly. Your base class should be open for extension, but closed for modification.
+Now, back to the hint I dropped: what if pieces could declare which contextual checks they require, rather than the base class hardcoding methods for each check?
+In C#, what mechanism exists that would allow a Piece to say "I require these specific validations" — where validations are themselves objects that can be defined externally and passed in?
+
+[Laurie]
+Sloppily guessing here, I think you mean Interfaces?
+
+[IA] 19 h 49
+Good instinct, but interfaces define contracts, not behavior. Think more about passing behavior as objects.
+What if a Validation was its own class — and a Pièce held a list of them? What design pattern does that remind you of?
+
+[Laurie]
+I would argue it has to be the strategy design pattern. Where each check is a strategy.
+
+[IA] 19 h 56
+Exactly. Now put it all together.
+If each Validation is a Strategy, and a Pièce holds a list of them — what does each Strategy need as input to do its job?
+
+[Laurie]
+It must have the Pièce being moved, the surrounding Friendly Pièces and the surrounding Ennemy Pièces. Otherwise how could we check if other pieces are put in danger by the move?
+
+[IA] 19 h 59
+Good. Now one final challenge before you have your complete design.
+You said each Strategy needs the surrounding friendly and enemy pieces. But "surrounding" is vague — the endangerment check for a King might need to scan the entire board, not just adjacent squares.
+Who is best positioned to gather and provide that context — the Pièce, or the Plateau?
+And if it's the Plateau, what does that imply about what gets passed into each Strategy's Execute() method?
+
+[Laurie]
+It is only reasonable that it would be the Plateau that gathers that context. And, as for the nature of the "Context", it probably will be the data structure that holds each positions in the plateau, whether occupied by a Dark Pièce, a Light Pièce or neither (Null).20 h 01Perfect. So you now have all the pieces (no pun intended) of your design. Let me have you assemble it:
+You have:
+
+A Coup with a start and end position
+A Pièce with a list of IValidation strategies
+A Plateau that holds the board state
+Each IValidation receiving some context object
+
+Can you now define, in plain terms or pseudocode, what the IValidation interface looks like, and what the validation sequence looks like when Plateau validates a Coup?
+
+[Laurie]
+The IValidationInterface is an interface with only a single method. ValiderCoup(Pièce pièceDéplacée, Grid<Pièce> contextePlateau).
+As for the Pièce, it will obviously contain a list of strategies. While playing each Coup, the Board will call a EffectuerValidation() method which will iterate over each element of the strategy list. Finally, each Validation strategy will receive the context of the board and check each possibility.
+
+[IA] 20 h 09
+Excellent. Your design is solid.
+One last refinement question — your ValiderCoup signature currently takes a Grid<Pièce> but not the Coup itself.
+Does a validation strategy need to know the destination of the move to do its job?
+
+[Laurie]
+Yes, the validation strategy must know the destination of the move as well. In particular, to check if the King moves to a place where it would be in danger.
+
+[IA] 20 h 10
+Exactly. So your final signature becomes something like:
+ValiderCoup(Pièce pièce, Coup coup, Grid<Pièce> contexte)
+You now have a complete, extensible design. To summarize what you arrived at:
+
+Pièce validates move nature intrinsically (diagonal, orthogonal, L-shape)
+Pièce holds a list of IValidation strategies for contextual rules
+Plateau gathers board context and drives the validation sequence
+Each IValidation is self-contained — adding new rules requires no modification to existing classes
+
+Adding a Garde or Bouclier piece with exotic rules now requires zero changes to your base classes. You just implement a new IValidation and register it on that piece.
+What pattern did you essentially just combine with Strategy to allow pieces to declare their own validations at construction time?
+
+[Laurie]
+Maybe the builder pattern?
+
+[IA] 20 h 14
+Not quite — the Builder is for constructing complex objects step by step. Think simpler.
+The strategies are injected into the Pièce from outside, rather than the Pièce creating them itself. What principle or pattern is that?
+
+[Laurie]
+Dependency injection!
+
+[IA] 20 h 15
+Exactly. And in practice, where would you instantiate each Pièce with its correct list of IValidation strategies injected in?
+
+[Laurie]
+When creating the board?
+
+[IA] 20 h 16
+Yes, but more precisely — you'd want a dedicated class responsible for constructing each Pièce with its correct strategies.
+You mentioned the Builder earlier, but there's a simpler pattern that says "I am responsible for creating objects of a specific type."
+What pattern is that?
+
+[Laurie]
+The factory type?
+
+[IA] 20 h 16
+Exactly. A PièceFactory responsible for instantiating each concrete Pièce with its correct IValidation strategies pre-injected. This also means your Plateau never needs to know how pieces are constructed.
+You've now arrived at a clean, complete design combining:
+
+Strategy for contextual validations
+Dependency Injection for flexibility
+Factory for construction
+OCP respected throughout
+
+Well done. Do you want to stress-test any part of this design further, or are you confident to implement?But each piece type still has its own class type right?20 h 17Yes, absolutely. Each piece retains its own class for its intrinsic movement validation — a Pion still knows it moves forward, a Cavalier still knows it moves in an L. That logic belongs to the piece itself and doesn't change.
+The Strategy pattern only handles the contextual rules that require board awareness. The class hierarchy remains intact.
+So your two layers are clearly separated:
+
+Class type → intrinsic movement nature
+Injected strategies → contextual board rules
+
+Does that distinction feel clean to you?
+
+[Laurie]
+Yes, thank you for helping me!
+
+[IA] 20 h 18
+Great work — you arrived at every conclusion yourself through solid reasoning. That's the mark of good design intuition.
+Good luck with the implementation!
