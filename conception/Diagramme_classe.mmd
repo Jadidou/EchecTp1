@@ -4,6 +4,11 @@ auteurice: Laurie Boucher et Jade Lirette
 description: Diagramme de classe principal du système d'échecs
 date-creation: 2026-02-26
 date-modification: 2026-02-26
+
+config:
+  layout: elk
+  elk:
+    mergesEdges: true
 ---
 classDiagram
 
@@ -14,16 +19,157 @@ class FormPartie {
 
 class Echecs
 
-class JeuEchec
+class JeuEchecs
 
 class Joueur
-class Partie
-class Piece
-class Plateau
+class Partie {
+  -Joueur joueurBlanc
+  -Joueur joueurNoir
+  -List~Piece~ piecesEnJeu
+  -List~Piece~ piecesCapturees
+  -Stack~Coup~ coupsJoues
+  -Stack~Coup~ coupsAnnules
+  -Plateau plateau
+}
 
-class Pion
-class Fou
-class Roi
-class Dame
-class Tour
-class Cavalier
+class Result~T~
+
+
+
+class Couleur {
+  <<Enumeration>>
+  BLANC
+  NOIR
+}
+class Plateau {
+  -Piece[][] cases
+}
+
+class Position {
+  char coordHorizontale
+  byte coordVerticale
+}
+
+namespace GestionPieces {
+  class UsinePiece {
+    +CreerRoi(Couleur couleur) Piece
+    +CreerDame(Couleur couleur) Piece
+    +CreerPion(Couleur couleur) Piece
+    +CreerFou(Couleur couleur) Piece
+    +CreerTour(Couleur couleur) Piece
+    +CreerCavalier(Couleur couleur) Piece
+  }
+  class Piece {
+    -Couleur couleur
+    -bool EstVulnerable
+    %% Initialisée à Faux, puis changée à Vrai au premier coup.
+    -bool sEstDeplacee
+    %% Toutes les pièces devraient contenir la stratégie ValidationExposePieceVulnerable.
+    -List~IValidation~ validations
+
+    -bool PeutInitierRoque
+    -bool PeutParticiperARoque
+    -bool PeutCharger
+    -bool PeutPrendreEnPassant
+    
+    +CoupsPossibles(Plateau contexte) List~Position~
+    +ValiderMouvement(int deplacementHorizontal, int deplacementVertical) Result~bool~
+    +EffectuerValidations() Result~bool~
+    
+    %% La limite de distance peut suivre trois possibilités:
+    %% 1. Cas = 0: La pièce ne peut pas se déplacer dans cette direction.
+    %% 2. Cas = n: La pièce peut se déplacer jusqu'à N cases.
+    %% 1. Cas = -1: La pièce n'a pas de limite de déplacement.
+    -MouvementsOrthogonaux limitesOrthogonales
+    -MouvementsDiagonaux limitesDiagonales
+    -bool peutSeDeplacerEnL
+  }
+
+  class MouvementsDiagonaux {
+    <<struct>>
+    +int GaucheHaut
+    +int GaucheBas
+    +int DroiteHaut
+    +int DroiteBas
+  }
+  class MouvementsOrthogonaux {
+    <<struct>>
+    +int Haut
+    +int Bas
+    +int Gauche
+    +int Droite
+  }
+}
+
+Couleur *-- Piece
+Piece --* MouvementsDiagonaux
+Piece --* MouvementsOrthogonaux
+
+namespace GestionGoups {
+  class Coup {
+    <<Abstract>>
+    -Piece pieceEnMouvement
+    -Position positionInitiale
+    -Position positionFinale
+  }
+  class CoupStandard {
+    -Piece pieceCapturee
+  }
+  class CoupRoque {
+    -Piece pieceParticipant
+  }
+  class CoupCharge
+  class CoupEnPassant {
+    -Piece pieceCapturee
+  }
+  class UsineCoups {
+    +CreerCoup(Plateau contexte, Position posInitiale, Position posFinale)
+  }
+}
+
+namespace Validations {
+  class IValidation {
+    <<Interface>>
+    ValiderStrategie() Result~bool~
+  }
+
+  class ValidationPieceNeSautePas
+  class ValidationCaptureDiagonale
+  class ValidationPieceNeSeMetPasEnDanger
+  class ValidationNExposePasPieceVulnerable
+}
+IValidation <|.. ValidationPieceNeSautePas
+IValidation <|.. ValidationCaptureDiagonale
+ValidationPieceNeSeMetPasEnDanger ..|> IValidation
+ValidationNExposePasPieceVulnerable ..|> IValidation
+
+
+FormPartie *-- Menu
+Menu *-- Echecs
+
+Echecs --* JeuEchecs
+
+JeuEchecs --* Partie
+JeuEchecs --* Joueur
+
+Joueur o-- Partie
+Joueur o-- Partie
+
+Partie "1" --* "1" Plateau
+Partie "1" --* "2..32" Piece
+Partie "1" --* "0..30" Piece
+Partie "1" --* "0..n" Coup
+Partie "1" --* "0..n" Coup
+Partie "1" --* "1" UsineCoups
+
+UsineCoups --> Coup
+
+
+Coup <|-- CoupCharge
+Coup <|-- CoupRoque
+Coup <|-- CoupStandard
+Coup <|-- CoupEnPassant
+
+Piece o-- CoupEnPassant
+Piece o-- CoupStandard
+Piece o-- CoupRoque
