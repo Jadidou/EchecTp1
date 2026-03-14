@@ -17,12 +17,12 @@ namespace Tp1Echec
 
         public override bool ValiderGeometrie(Coup coup)
         {
-            return true;
+            return coup.EstOrthogonal() || coup.EstDiagonal();
         }
 
         public override bool ValiderLimite(Coup coup)
         {
-            return true;
+            return coup.Longueur() <= 2;
         }
 
         public override bool PeutEtrePromu()

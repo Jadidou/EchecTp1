@@ -18,7 +18,7 @@ namespace Tp1Echec
 
         public override bool ValiderCoup(Coup coup)
         {
-            return true;
+            return ValiderGeometrie(coup);
         }
 
         public abstract bool ValiderGeometrie(Coup coup);

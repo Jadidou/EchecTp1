@@ -9,9 +9,6 @@ namespace Tp1Echec
     public class Cavalier : SansCollision
     {
 
-        //attributs
-
-
         //constructeur
         public Cavalier(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
@@ -19,7 +16,9 @@ namespace Tp1Echec
 
         public override bool ValiderCoup(Coup coup)
         {
-            return true;
+
+            return coup.EstEnL();
+
         }
 
         public override bool PieceEstVulnerable()

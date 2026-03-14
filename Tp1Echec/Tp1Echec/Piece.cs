@@ -59,21 +59,29 @@ namespace Tp1Echec
 
         public abstract bool PieceEstVulnerable();
 
+        //Indique si la pièce à bougé ou non
         public void SetPieceABouge(bool aBouge)
         {
 
+            _pieceNaPasBouge = !aBouge;
 
         }
 
+        //retourne si pièce à déjà bougé
         public bool PieceABouge()
         {
-            return true;
+            return !_pieceNaPasBouge;
         }
 
+        //Convertit la pièce en texte
         public string Serilization()
         {
 
-            return "";
+            string couleur = _pieceEstBlanche ? "Blanc" : "Noir";
+            string etat = _pieceNaPasBouge ? "PasBouge" : "DejaBouge";
+
+            return $"{GetType().Name};{couleur};{etat}";
+
         }
 
         //destructeur

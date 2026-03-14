@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\pion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\joueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\joueur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\tp1echec\\roi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\roi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\tp1echec\\pion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\pion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\jeuechec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\jeuechec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\tp1echec\\coup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\coup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\tp1echec\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,28 +39,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Pion.cs",
-              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Pion.cs",
-              "RelativeDocumentMoniker": "Tp1Echec\\Pion.cs",
-              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Pion.cs",
-              "RelativeToolTip": "Tp1Echec\\Pion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Joueur.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Joueur.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Joueur.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Joueur.cs",
+              "RelativeToolTip": "Tp1Echec\\Joueur.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAmwBoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T01:54:03.848Z",
+              "WhenOpened": "2026-03-14T17:59:21.524Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "JeuEchec.cs",
-              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\JeuEchec.cs",
-              "RelativeDocumentMoniker": "Tp1Echec\\JeuEchec.cs",
-              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\JeuEchec.cs",
-              "RelativeToolTip": "Tp1Echec\\JeuEchec.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Title": "Roi.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Roi.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Roi.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Roi.cs",
+              "RelativeToolTip": "Tp1Echec\\Roi.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAIwBcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T01:46:03.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T17:55:19.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pion.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Pion.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Pion.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Pion.cs",
+              "RelativeToolTip": "Tp1Echec\\Pion.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T17:55:07.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Coup.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Coup.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Coup.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Coup.cs",
+              "RelativeToolTip": "Tp1Echec\\Coup.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA1wCkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T17:33:40.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Piece.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Piece.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\Piece.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Piece.cs",
+              "RelativeToolTip": "Tp1Echec\\Piece.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAswFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T17:16:41.047Z"
             }
           ]
         }

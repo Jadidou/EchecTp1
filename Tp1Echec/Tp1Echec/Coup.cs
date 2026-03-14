@@ -29,19 +29,19 @@ namespace Tp1Echec
 
         //proprieter
 
-        public (int, int) PosDebut
+        public (int, int) posDebut
         {
             get { return _posDebut; }
             set { _posDebut = value; }
         }
 
-        public (int, int) PosFin
+        public (int, int) posFin
         {
             get { return _posFin; }
             set { _posFin = value; }
         }
 
-        public bool EstTourBlanc
+        public bool estTourBlanc
         {
             get { return _estTourBlanc; }
             set { _estTourBlanc = value; }

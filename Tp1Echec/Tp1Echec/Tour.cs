@@ -17,7 +17,7 @@ namespace Tp1Echec
 
         public override bool ValiderGeometrie(Coup coup)
         {
-            return true;
+            return coup.EstOrthogonal();
         }
 
         public override bool PeutInitierRoque()

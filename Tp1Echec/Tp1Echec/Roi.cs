@@ -18,12 +18,12 @@ namespace Tp1Echec
 
         public override bool ValiderGeometrie(Coup coup)
         {
-            return true;
+            return coup.EstOrthogonal() || coup.EstDiagonal();
         }
 
         public override bool ValiderLimite(Coup coup)
         {
-            return true;
+            return coup.Longueur() == 1;
         }
 
         public override bool PieceEstVulnerable()

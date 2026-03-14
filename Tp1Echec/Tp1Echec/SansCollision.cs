@@ -18,6 +18,7 @@ namespace Tp1Echec
 
         //methode
 
+        //Les pièces ne sont jamais bloquées par d'autres pièces
         public override bool CauseCollision()
         {
             return false;

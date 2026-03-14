@@ -16,7 +16,7 @@ namespace Tp1Echec
 
         public override bool ValiderGeometrie(Coup coup)
         {
-            return true;
+            return coup.EstDiagonal();
         }
         public override bool PieceEstVulnerable()
         {

@@ -16,6 +16,7 @@ namespace Tp1Echec
 
         //methode
 
+        //Les pièces de cette catégorie peuvent entrer en collision avec d'autres pièces sur le plateau
         public override bool CauseCollision()
         {
             return true;
