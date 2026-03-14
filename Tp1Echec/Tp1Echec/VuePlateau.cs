@@ -16,5 +16,23 @@ namespace Tp1Echec
         {
             InitializeComponent();
         }
+
+        public void AbandonnerPartie()
+        {
+
+
+        }
+
+        public void DemanderNulle()
+        {
+
+
+        }
+
+        public void QuitterProgramme()
+        {
+
+
+        }
     }
 }

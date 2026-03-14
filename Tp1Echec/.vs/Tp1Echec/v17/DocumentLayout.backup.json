@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\partie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\partie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\cavalier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\cavalier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|c:\\users\\jadel\\onedrive - cegep de lanaudiere\\documents\\hiver2026\\orienterobjet\\tp1\\githubtp1\\tp1echec\\tp1echec\\jeuechec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C427E894-80E4-4769-B7AC-E93B8FD24C72}|Tp1Echec\\Tp1Echec.csproj|solutionrelative:tp1echec\\jeuechec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Partie.cs",
-              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Partie.cs",
-              "RelativeDocumentMoniker": "Tp1Echec\\Partie.cs",
-              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Partie.cs",
-              "RelativeToolTip": "Tp1Echec\\Partie.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Title": "JeuEchec.cs",
+              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\JeuEchec.cs",
+              "RelativeDocumentMoniker": "Tp1Echec\\JeuEchec.cs",
+              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\JeuEchec.cs",
+              "RelativeToolTip": "Tp1Echec\\JeuEchec.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T17:53:01.779Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cavalier.cs",
-              "DocumentMoniker": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Cavalier.cs",
-              "RelativeDocumentMoniker": "Tp1Echec\\Cavalier.cs",
-              "ToolTip": "C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Cavalier.cs",
-              "RelativeToolTip": "Tp1Echec\\Cavalier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T17:26:55.164Z",
+              "WhenOpened": "2026-03-14T01:46:03.807Z",
               "EditorCaption": ""
             }
           ]

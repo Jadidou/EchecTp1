@@ -6,21 +6,64 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
-    public class Pion
+    public class Pion : AvecLimite
     {
-
-        //attributs
-
 
         //constructeur
 
-        public Pion() { }
-
-        //proprieter
-
+        public Pion(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
         //methode
 
+        public override bool ValiderGeometrie(Coup coup)
+        {
+            return true;
+        }
+
+        public override bool ValiderLimite(Coup coup)
+        {
+            return true;
+        }
+
+        public override bool PeutEtrePromu()
+        {
+            return true;
+        }
+
+        public override bool PeutCharger()
+        {
+            return true;
+        }
+
+        public override bool PeutPrendreEnPassant()
+        {
+            return true;
+        }
+
+        public override bool CollisionParDevant()
+        {
+            return true;
+        }
+
+        public override bool PriseParDiagonal()
+        {
+            return true;
+        }
+
+        public override bool PieceEstVulnerable()
+        {
+            return false;
+        }
+
+        public override bool PeutInitierRoque()
+        {
+            return false;
+        }
+
+        public override bool PeutSuivreRoque()
+        {
+            return false;
+        }
 
         //destructeur
         ~Pion() { }

@@ -11,35 +11,104 @@ namespace Tp1Echec
 
         //attributs
 
-        private string m_name;
+        private Joueur _joueurBlanc;
+        private Joueur _joueurNoir;
+        private Stack<Plateau> _pilePlateau;
+        private List<string> _pileEtatPlateau;
 
         //constructeur
 
-        public Partie(string Name) 
+        public Partie(Joueur joueurBlanc, Joueur joueurNoir) 
         {
 
-            m_name = Name;
+            _joueurBlanc = joueurBlanc;
+            _joueurBlanc = joueurNoir;
+            _pilePlateau = new Stack<Plateau>();
+            _pileEtatPlateau = new List<string>();
 
         }
 
 
         //proprieter
 
-        public string Name {
-            get { return m_name; }
-            set { m_name = value; }
+        public Joueur joueurBlanc
+        {
+            get { return _joueurBlanc; }
+            set { _joueurBlanc = value; }
+        }
+
+        public Joueur joueurNoir
+        {
+            get { return _joueurNoir; }
+            set { _joueurNoir = value; }
+        }
+
+        //indexeur
+
+        public Plateau this[int index]
+        {
+            get
+            {
+                return _pilePlateau.ToArray()[index];
+            }
+        }
+
+        public string this[string index]
+        {
+            get
+            {
+                int i = int.Parse(index);
+                return _pileEtatPlateau[i];
+            }
+            set
+            {
+                int i = int.Parse(index);
+                _pileEtatPlateau[i] = value;
+            }
         }
 
         //methode
 
-        public string JoueurBlanc(string Name)
+        public bool VerificationNulleParBoucle()
         {
-            return m_name;
+
+            return true;
+
         }
 
-        public string JoueurNoir(string Name)
+        public void AjusterPointage()
         {
-            return m_name;
+
+        }
+
+        public int JouerCoup(string x, string y)
+        {
+
+            return 1;
+        }
+
+        public void DemarRerPartie()
+        {
+
+
+        }
+
+        public void AbandonnerPartie()
+        {
+
+
+        }
+
+        public void DemanderUneNulle()
+        {
+
+
+        }
+
+        public string AfficherPlateau()
+        {
+
+            return "";
         }
 
 

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         /// Point d'entrée principal de l'application.
@@ -17,6 +17,47 @@ namespace Tp1Echec
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+        }
+
+        public static string ConsulterListeJoueur()
+        {
+            return "";
+        }
+
+        public static int JouerCoup(string x, string y)
+        {
+
+            return 0;
+        }
+
+        public static void DemarrerPartie()
+        {
+
+
+        }
+
+        public static void AbandonnerPartie()
+        {
+
+
+        }
+
+        public static void QuitterProgramme()
+        {
+
+
+        }
+
+        public static string AfficherPlateau()
+        {
+
+            return "";
+        }
+
+        public static void DemanderUneNulle()
+        {
+
+
         }
     }
 }

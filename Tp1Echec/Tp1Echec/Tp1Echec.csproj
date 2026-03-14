@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvecLimite.cs" />
     <Compile Include="Cavalier.cs" />
     <Compile Include="Coup.cs" />
     <Compile Include="Dame.cs" />
@@ -53,12 +54,13 @@
     <Compile Include="Fou.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Partie.cs" />
-    <Compile Include="PieceAvecSaut.cs" />
-    <Compile Include="Pieces.cs" />
-    <Compile Include="PieceSansSaut.cs" />
+    <Compile Include="AvecCollision.cs" />
+    <Compile Include="Piece.cs" />
+    <Compile Include="SansCollision.cs" />
     <Compile Include="Pion.cs" />
     <Compile Include="Plateau.cs" />
     <Compile Include="Roi.cs" />
+    <Compile Include="SansLimite.cs" />
     <Compile Include="Tour.cs" />
     <Compile Include="VuePlateau.cs">
       <SubType>Form</SubType>

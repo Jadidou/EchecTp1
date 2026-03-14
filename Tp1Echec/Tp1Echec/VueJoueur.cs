@@ -16,5 +16,17 @@ namespace Tp1Echec
         {
             InitializeComponent();
         }
+
+        public void ConsulterListeJoueurs()
+        {
+
+
+        }
+
+        public void VoirPointageJoueurs()
+        {
+
+
+        }
     }
 }
