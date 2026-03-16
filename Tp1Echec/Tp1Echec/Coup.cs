@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,21 +24,21 @@ namespace Tp1Echec
         // @param estTourBlanc permet de savoir si c'est le tour des joueurs blancs.
         // @return Le coup.
         public Coup((int, int) posDebut, (int, int) posFin, bool estTourBlanc)
-        { 
+        {
             _posDebut = posDebut;
             _posFin = posFin;
             _estTourBlanc = estTourBlanc;
-        
+
         }
 
         // @brief Contructeur du coup à partir de coordonées d'échiquier.
-        // @param posDebut Les coordonnées d'échiquier de début du coup.
-        // @param posFin Les coordonnées d'échiquier de début du coup.
+        // @param posDebut Les coordonnées d'échiquier de début du coup (ex: "e2").
+        // @param posFin Les coordonnées d'échiquier de fin du coup (ex: "e4").
         // @param estTourBlanc permet de savoir si c'est le tour des joueurs blancs.
         // @return Le coup.
-        // @throws ArgumentError Si les entrées ne sont pas conforme à l'expression régulière `^[a-hA-H][1-8]$`.
+        // @throws ArgumentException Si les entrées ne sont pas conformes à l'expression régulière `^[a-hA-H][1-8]$`.
         public Coup(string posDebut, string posFin, bool estTourBlanc)
-        { 
+        {
             // Basée sur les coordonnées de base d'un échiquier: a1 à h8.
             const string COUP_PATTERN_REGEX = "^[a-h][1-8]$";
 
@@ -56,27 +56,26 @@ namespace Tp1Echec
             }
             else
             {
-                int posIniCol => posDebut[0] switch
+                // Conversion colonne : 'a'→0, 'b'→1, ..., 'h'→7 (0-based, correspond à _grillage[col, row])
+                int posIniCol = posDebut[0] switch
                 {
-                    "a" => 1, "b" => 2, "c" => 3, "d" => 4,
-                    "e" => 5, "f" => 6, "g" => 7, "h" => 8
-                }
-                int posFinCol => posFin[0] switch
+                    'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
+                    'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7,
+                    _ => throw new ArgumentException("Colonne invalide.")
+                };
+                int posFinCol = posFin[0] switch
                 {
-                    "a" => 1, "b" => 2, "c" => 3, "d" => 4,
-                    "e" => 5, "f" => 6, "g" => 7, "h" => 8
-                }
-                int posIniLign => posDebut[0] switch
-                {
-                    "1" => 1, "2" => 2, "3" => 3, "4" => 4,
-                    "5" => 5, "6" => 6, "7" => 7, "8" => 8
-                }
-                int posFinLign => posFin[0] switch
-                {
-                    "1" => 1, "2" => 2, "3" => 3, "4" => 4,
-                    "5" => 5, "6" => 6, "7" => 7, "8" => 8
-                }
-                this = new Coup((posIniCol, posIniLign), (posFinCol, posFinLign), estTourBlanc);
+                    'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
+                    'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7,
+                    _ => throw new ArgumentException("Colonne invalide.")
+                };
+                // Conversion rangée : posDebut[1] est le chiffre ('1'→0, '8'→7), 0-based
+                int posIniLign = posDebut[1] - '1';
+                int posFinLign = posFin[1] - '1';
+
+                _posDebut = (posIniCol, posIniLign);
+                _posFin = (posFinCol, posFinLign);
+                _estTourBlanc = estTourBlanc;
             }
         }
 
