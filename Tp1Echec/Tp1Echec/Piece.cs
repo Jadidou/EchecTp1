@@ -11,7 +11,7 @@ namespace Tp1Echec
 
         //atributs
 
-        private bool _pieceEstBlanche;
+        protected bool _pieceEstBlanche;
         private bool _pieceNaPasBouge;
 
         //constructeur
@@ -58,6 +58,7 @@ namespace Tp1Echec
         public abstract bool PriseParDiagonal();
 
         public abstract bool PieceEstVulnerable();
+        public abstract string Serilization();
 
         //Indique si la pièce à bougé ou non
         public void SetPieceABouge(bool aBouge)
@@ -73,16 +74,7 @@ namespace Tp1Echec
             return !_pieceNaPasBouge;
         }
 
-        //Convertit la pièce en texte
-        public string Serilization()
-        {
 
-            string couleur = _pieceEstBlanche ? "Blanc" : "Noir";
-            string etat = _pieceNaPasBouge ? "PasBouge" : "DejaBouge";
-
-            return $"{GetType().Name};{couleur};{etat}";
-
-        }
 
         //destructeur
         ~Piece() { }

@@ -60,6 +60,11 @@ namespace Tp1Echec
         {
             return false;
         }
+        public override string Serilization()
+        {
+            string color = _pieceEstBlanche ? "W" : "B";
+            return color + "N";
+        }
 
         //destructeur
         ~Cavalier() { }

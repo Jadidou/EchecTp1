@@ -56,20 +56,32 @@ namespace Tp1Echec
             }
             else
             {
-                // Conversion colonne : 'a'→0, 'b'→1, ..., 'h'→7 (0-based, correspond à _grillage[col, row])
-                int posIniCol = posDebut[0] switch
+                char _char = posDebut[0];
+                int posIniCol = 0;
+                switch(_char)
                 {
-                    'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
-                    'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7,
-                    _ => throw new ArgumentException("Colonne invalide.")
-                };
-                int posFinCol = posFin[0] switch
+                    case 'a': posIniCol = 0; break;
+                    case 'b': posIniCol = 1; break;
+                    case 'c': posIniCol = 2; break;
+                    case 'd': posIniCol = 3; break;
+                    case 'e': posIniCol = 4; break;
+                    case 'f': posIniCol = 5; break;
+                    case 'g': posIniCol = 6; break;
+                    case 'h': posIniCol = 7; break;
+                }
+                _char = posFin[0];
+                int posFinCol = 0;
+                switch (_char)
                 {
-                    'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
-                    'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7,
-                    _ => throw new ArgumentException("Colonne invalide.")
-                };
-                // Conversion rangée : posDebut[1] est le chiffre ('1'→0, '8'→7), 0-based
+                    case 'a': posFinCol = 0; break;
+                    case 'b': posFinCol = 1; break;
+                    case 'c': posFinCol = 2; break;
+                    case 'd': posFinCol = 3; break;
+                    case 'e': posFinCol = 4; break;
+                    case 'f': posFinCol = 5; break;
+                    case 'g': posFinCol = 6; break;
+                    case 'h': posFinCol = 7; break;
+                }
                 int posIniLign = posDebut[1] - '1';
                 int posFinLign = posFin[1] - '1';
 
