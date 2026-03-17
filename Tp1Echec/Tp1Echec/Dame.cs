@@ -13,6 +13,8 @@ namespace Tp1Echec
 
         public Dame(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
+        public Dame(Dame dame) : base(dame.PieceEstBlanche, dame.PieceNaPasBouge) { }
+
         //methode
 
         public override bool ValiderGeometrie(Coup coup)
@@ -62,6 +64,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "Q";
+        }
+
+        public override Piece Copier()
+        {
+            return new Dame(this);
         }
 
         //destructeur

@@ -13,6 +13,8 @@ namespace Tp1Echec
 
         public Pion(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
+        public Pion(Pion pion) : base(pion.PieceEstBlanche, pion.PieceNaPasBouge) { }
+
         //methode
 
         public override bool ValiderGeometrie(Coup coup)
@@ -69,6 +71,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "P";
+        }
+
+        public override Piece Copier()
+        {
+            return new Pion(this);
         }
 
         //destructeur

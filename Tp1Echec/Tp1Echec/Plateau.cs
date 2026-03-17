@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,20 @@ namespace Tp1Echec
         {
             _grillage = new Piece[8, 8];
             _dernierPionDoubleAvance = null;
+        }
+
+        public Plateau(Plateau plateau)
+        {
+            _grillage = new Piece[8, 8];
+            _dernierPionDoubleAvance = plateau._dernierPionDoubleAvance;
+            for (int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if (plateau._grillage[i, j] != null)
+                        _grillage[i, j] = plateau._grillage[i, j].Copier();
+                }
+            }
         }
 
         // Indexeur
@@ -104,13 +119,29 @@ namespace Tp1Echec
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (col > 0) sb.Append("|");
+                    if (col > 0) sb.Append(",");
                     Piece p = _grillage[col, row];
                     sb.Append(p != null ? p.Serilization() : "_");
                 }
                 sb.AppendLine();
             }
             return sb.ToString();
+        }
+
+        // FONCTION AvoirPiecesEnnemi
+        // Parse le plateau et retourne une List<Piece> de toutes les pieces ennemies
+        // Recoit en paramètre une couleur (avec le booléen).
+        public List<Piece> AvoirPiecesEnnemi(bool estBlanc)
+        {
+            List<Piece> piecesEnnemies = new List<Piece>();
+            for (int col = 0; col < 8; col++)
+                for (int row = 0; row < 8; row++)
+                {
+                    Piece p = _grillage[col, row];
+                    if (p != null && p.PieceEstBlanche != estBlanc)
+                        piecesEnnemies.Add(p);
+                }
+            return piecesEnnemies;
         }
 
         // Valide un coup complet en appliquant toutes les règles du jeu dans l'ordre.
@@ -135,15 +166,19 @@ namespace Tp1Echec
             if (piece.PieceEstBlanche != coup.estTourBlanc)
                 return false;
 
-            // 4. La destination ne doit pas être occupée par une pièce amie
+            // 4. La destination ne doit pas être occupée par une pièce amie (sauf roque : la Tour est alliée)
             Piece destination = _grillage[x2, y2];
-            if (destination != null && destination.PieceEstBlanche == coup.estTourBlanc)
+            if (destination != null && destination.PieceEstBlanche == coup.estTourBlanc
+                && !(piece.PeutInitierRoque() && !piece.PieceABouge() && destination.PeutSuivreRoque() && !destination.PieceABouge()))
                 return false;
 
             int dx = x2 - x1;
             int dy = y2 - y1;
 
-            // TODO: Cas spécial roque. Il ne faut pas briser le polymorphisme (bad claude ('_')).
+            // 4.5 Roque : si le Roi capture la Tour alliée, déléguer entièrement à ValiderRoque
+            if (piece.PeutInitierRoque() && !piece.PieceABouge()
+                && destination != null && destination.PeutSuivreRoque() && !destination.PieceABouge())
+                return ValiderRoque(coup);
 
             // 5. Validation géométrique déléguée à la pièce
             if (!piece.ValiderCoup(coup))
@@ -247,16 +282,43 @@ namespace Tp1Echec
             return true;
         }
 
-        // Pas correct
-        // Valide un coup de roque : Roi bouge de 2 colonnes horizontalement vers la Tour.
-        // Conditions cumulatives : Roi et Tour n'ont pas bougé, chemin libre entre eux,
-        // Roi pas en échec actuellement, case de transit du Roi non attaquée (simulée).
-        // Roque côté roi : dx=+2, Tour col 7 ; roque côté dame : dx=-2, Tour col 0.
+        // Les méthodes PieceABouge(): bool, PeutInitierRoque(): bool et PeutSuivreRoque(): bool vont te permettre de vérifier si le roque peut être fait.
+        // 1. Valide si le roque peut être fait. (SINON early return)
+        // 2. Si correct, faire la validation que le chemin pour le roi est Safe (copier plateau, null où le roi est, nouveau roi à la première case intermédiaire, vérifierEchec(), si good, on recommence, jusqu'à atteindre la case destination) early return sinon.
+        // 3. Si tout est parfait, on retourne true.
         private bool ValiderRoque(Coup coup)
         {
-            // TODO: Réimplémenter avec le polymorphisme : utiliser PeutInitierRoque() sur le Roi
-            //       et PeutSuivreRoque() sur la Tour au lieu des vérifications de type.
-            return false;
+            int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
+            int x2 = coup.posFin.Item1,  y2 = coup.posFin.Item2;
+
+            // Le roque est horizontal (même rangée)
+            if (y1 != y2) return false;
+
+            Piece roi = _grillage[x1, y1];
+            Piece tour = _grillage[x2, y2];
+
+            // 1. Vérifications polymorphiques : Roi et Tour n'ont pas bougé
+            if (roi == null || !roi.PeutInitierRoque() || roi.PieceABouge()) return false;
+            if (tour == null || !tour.PeutSuivreRoque() || tour.PieceABouge()) return false;
+
+            // Chemin libre entre le roi et la tour (cases intermédiaires)
+            if (!CheminLibre(coup)) return false;
+
+            // 2. Le roi ne doit pas être en échec sur sa case actuelle, de transit, ni d'arrivée
+            // On simule le roi à chaque case traversée (case 0 = départ, 1 = transit, 2 = arrivée finale)
+            int direction = Math.Sign(x2 - x1);
+            for (int pas = 0; pas <= 2; pas++)
+            {
+                int caseRoi = x1 + pas * direction;
+                Plateau simulation = new Plateau(this);
+                simulation._grillage[x1, y1] = null;
+                simulation._grillage[caseRoi, y1] = roi;
+                if (simulation.VerificationEchec(coup.estTourBlanc))
+                    return false;
+            }
+
+            // 3. Tout est valide
+            return true;
         }
 
         // Very bad (pas contente).
@@ -293,73 +355,69 @@ namespace Tp1Echec
             // TODO: Promotion automatique — réimplémenter avec polymorphisme (PeutPromouvoir() sur Pion).
         }
 
-        // Vérifie si le roi de la couleur donnée est actuellement sous attaque.
-        // Parcourt toutes les pièces adverses et vérifie si elles peuvent atteindre le roi.
-        // Pour les pions : seulement les diagonales d'attaque (pas l'avance droite qui ne prend pas).
-        // N'appelle pas ValiderCoup (Plateau) pour éviter la récursion infinie via SimulerCoup.
         public bool VerificationEchec(bool estBlanc)
         {
-            (int roiCol, int roiRow) = TrouverRoi(estBlanc);
-            if (roiCol == -1) return false; // Roi introuvable (ne devrait pas arriver en partie normale)
-
-            for (int col = 0; col < 8; col++)
+            List<Tuple<int, int>> listePos = TrouverPiecesVulnerables(estBlanc);
+            if (listePos.Count <= 0) return false; // Aucune pièce vulnérable (ne devrait pas arriver).
+            foreach (Tuple<int, int> pos in listePos)
             {
-                for (int row = 0; row < 8; row++)
+                int roiCol = pos.Item1;
+                int roiRow = pos.Item2;
+
+                for (int col = 0; col < 8; col++)
                 {
-                    Piece piece = _grillage[col, row];
-                    if (piece == null || piece.PieceEstBlanche == estBlanc)
-                        continue; // Ignorer les cases vides et les pièces alliées
-
-                    // Traitement spécial pour le pion : attaque uniquement en diagonale vers l'avant
-                    // Un pion blanc (dirAttaque=+1) attaque (col±1, row+1) ; noir : (col±1, row-1)
-                    if (piece is Pion)
+                    for (int row = 0; row < 8; row++)
                     {
-                        int dirAttaque = piece.PieceEstBlanche ? 1 : -1;
-                        if (row + dirAttaque == roiRow && Math.Abs(col - roiCol) == 1)
-                            return true;
-                        continue;
+                        Piece piece = _grillage[col, row];
+                        if (piece == null || piece.PieceEstBlanche == estBlanc)
+                            continue; // Ignorer les cases vides et les pièces alliées
+
+                        // Traitement spécial pour le pion : attaque uniquement en diagonale vers l'avant
+                        // Un pion blanc (dirAttaque=+1) attaque (col±1, row+1) ; noir : (col±1, row-1)
+                        if (piece is Pion)
+                        {
+                            int dirAttaque = piece.PieceEstBlanche ? 1 : -1;
+                            if (row + dirAttaque == roiRow && Math.Abs(col - roiCol) == 1)
+                                return true;
+                            continue;
+                        }
+
+                        // Pour les autres pièces : vérifier la géométrie (piece.ValiderCoup = niveau pièce, pas plateau)
+                        Coup attaque = new Coup((col, row), (roiCol, roiRow), !estBlanc);
+                        if (!piece.ValiderCoup(attaque))
+                            continue;
+
+                        // Vérifier le chemin libre pour les pièces qui ne peuvent pas sauter
+                        if (piece.CauseCollision() && !CheminLibre(attaque))
+                            continue;
+
+                        return true;
                     }
-
-                    // Pour les autres pièces : vérifier la géométrie (piece.ValiderCoup = niveau pièce, pas plateau)
-                    Coup attaque = new Coup((col, row), (roiCol, roiRow), !estBlanc);
-                    if (!piece.ValiderCoup(attaque))
-                        continue;
-
-                    // Vérifier le chemin libre pour les pièces qui ne peuvent pas sauter
-                    if (piece.CauseCollision() && !CheminLibre(attaque))
-                        continue;
-
-                    return true;
                 }
             }
-
             return false;
         }
 
-        // Cherche la position du Roi de la couleur donnée sur le plateau.
+        // Cherche une liste des positions des pièces vulnérables de la couleur donnée sur le plateau.
         // Retourne (-1, -1) si le Roi est introuvable (cas anormal en partie normale).
         // Utilisé par VerificationEchec et indirectement par VerificationEchecMat et VerificationEchecPat.
-        private (int, int) TrouverRoi(bool estBlanc)
+        private List<Tuple<int, int>> TrouverPiecesVulnerables(bool estBlanc)
         {
+            List<Tuple<int, int>> liste = new List<Tuple<int, int>>();
             for (int col = 0; col < 8; col++)
                 for (int row = 0; row < 8; row++)
                 {
                     Piece p = _grillage[col, row];
                     if (p != null && p.PieceEstVulnerable() && p.PieceEstBlanche == estBlanc)
-                        return (col, row);
+                        liste.Add(new Tuple<int,int>(col, row));
                 }
-            return (-1, -1);
+            return liste;
         }
 
         // PAS GOOD.
-        // Crée une copie superficielle du plateau avec le coup appliqué sans effets de bord.
-        // Shallow copy : les références aux pièces sont partagées — ne pas modifier les pièces via la simulation.
-        // N'appelle pas SetPieceABouge, ne gère pas le roque ni l'en passant pour éviter les effets secondaires.
-        // Utilisé exclusivement par ValiderCoup et ValiderRoque pour tester si le roi reste en sécurité.
         private Plateau SimulerCoup(Coup coup)
         {
-            // TODO: Réimplémenter la simulation sans accès direct aux champs privés d'une autre instance.
-            return new Plateau();
+            return new Plateau(this);
         }
 
         // Maybe good?

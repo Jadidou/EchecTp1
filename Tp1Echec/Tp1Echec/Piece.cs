@@ -24,7 +24,7 @@ namespace Tp1Echec
         }
 
 
-        //proprieter
+        // Proprietés
 
         public bool PieceEstBlanche
         {
@@ -37,7 +37,7 @@ namespace Tp1Echec
             set { _pieceNaPasBouge = value; }
         }
 
-        //methode
+        // Méthodes
 
         public abstract bool ValiderCoup(Coup coup);
 
@@ -60,7 +60,9 @@ namespace Tp1Echec
         public abstract bool PieceEstVulnerable();
         public abstract string Serilization();
 
-        //Indique si la pièce à bougé ou non
+        public abstract Piece Copier();
+
+        //Indique si la pièce a bougé ou non
         public void SetPieceABouge(bool aBouge)
         {
 
@@ -68,7 +70,7 @@ namespace Tp1Echec
 
         }
 
-        //retourne si pièce à déjà bougé
+        //retourne si pièce a déjà bougé
         public bool PieceABouge()
         {
             return !_pieceNaPasBouge;

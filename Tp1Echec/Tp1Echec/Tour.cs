@@ -13,6 +13,8 @@ namespace Tp1Echec
 
         public Tour(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
+        public Tour(Tour tour) : base(tour.PieceEstBlanche, tour.PieceNaPasBouge) { }
+
         //methode
 
         public override bool ValiderGeometrie(Coup coup)
@@ -63,6 +65,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "R";
+        }
+
+        public override Piece Copier()
+        {
+            return new Tour(this);
         }
 
         //destructeur

@@ -14,6 +14,8 @@ namespace Tp1Echec
 
         public Roi(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
+        public Roi(Roi roi) : base(roi.PieceEstBlanche, roi.PieceNaPasBouge) { }
+
         //methode
 
         public override bool ValiderGeometrie(Coup coup)
@@ -69,6 +71,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "K";
+        }
+
+        public override Piece Copier()
+        {
+            return new Roi(this);
         }
 
         //destructeur

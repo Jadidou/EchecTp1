@@ -12,6 +12,8 @@ namespace Tp1Echec
         //constructeur
         public Cavalier(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
 
+        public Cavalier(Cavalier cavalier) : base(cavalier.PieceEstBlanche, cavalier.PieceNaPasBouge) { }
+
         //methode
 
         public override bool ValiderCoup(Coup coup)
@@ -64,6 +66,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "N";
+        }
+
+        public override Piece Copier()
+        {
+            return new Cavalier(this);
         }
 
         //destructeur

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace Tp1Echec
 
         //constructeur
         public Fou(bool pieceEstBlanche, bool pieceNaPasBouge) : base(pieceEstBlanche, pieceNaPasBouge) { }
+
+        public Fou(Fou fou) : base(fou.PieceEstBlanche, fou.PieceNaPasBouge) { }
 
         //methode
 
@@ -61,6 +64,11 @@ namespace Tp1Echec
         {
             string color = _pieceEstBlanche ? "W" : "B";
             return color + "B";
+        }
+
+        public override Piece Copier()
+        {
+            return new Fou(this);            
         }
 
         //destructeur
