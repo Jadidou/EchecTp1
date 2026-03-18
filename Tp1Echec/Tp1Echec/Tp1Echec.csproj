@@ -63,13 +63,13 @@
     <Compile Include="SansLimite.cs" />
     <Compile Include="Tour.cs" />
     <Compile Include="VuePlateau.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="VuePlateau.Designer.cs">
       <DependentUpon>VuePlateau.cs</DependentUpon>
     </Compile>
     <Compile Include="VueJoueur.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="VueJoueur.Designer.cs">
       <DependentUpon>VueJoueur.cs</DependentUpon>
@@ -92,6 +92,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VueJoueur.resx">
+      <DependentUpon>VueJoueur.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VuePrincipale.resx">
       <DependentUpon>VuePrincipale.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,16 +1,1 @@
-{
-  "ShowEmptyProjects": false,
-  "SelectedGroups": [],
-  "ExpandedProjects": [],
-  "EnableSpellChecker": true,
-  "ColumnOrder": [
-    "name",
-    "type",
-    "neutral-value",
-    "neutral-comment"
-  ],
-  "VisibleColumnKeys": [
-    "name",
-    "neutral-value"
-  ]
-}
+{"ShowEmptyProjects":false,"CustomColumnOrderings":{"name":0,"type":1,"neutral-value":2,"neutral-comment":3},"ShowValidationErrors":true,"SelectedResourceGroupsByProjectFilePath":{"C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\Tp1Echec.csproj":["C:\\Users\\jadel\\OneDrive - Cegep de Lanaudiere\\Documents\\hiver2026\\orienterObjet\\Tp1\\GitHubTp1\\Tp1Echec\\Tp1Echec\\VueJoueur.resx"]},"VisibleColumnKeys":["name","neutral-value","neutral-comment"]}

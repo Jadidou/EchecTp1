@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
-    public partial class VuePlateau : Form
+    public partial class VuePlateau : UserControl
     {
         // état du drag
         private bool isDragging = false;
@@ -23,7 +23,7 @@ namespace Tp1Echec
             InitializeComponent();
             MakeSquaresTransparent();
             AttachSquareEvents();
-            PlaceWhiteKnight();
+            //PlaceWhiteKnight();
         }
 
         private void MakeSquaresTransparent()
@@ -203,7 +203,7 @@ namespace Tp1Echec
         }
 
         // place un cavalier blanc de test (image depuis resources) sur B1 et tague "WKnight"
-        private void PlaceWhiteKnight()
+        /*private void PlaceWhiteKnight()
         {
             if (this.PlateauEchec == null) return;
             var pb = this.PlateauEchec.Controls.Find("B1", true).FirstOrDefault() as PictureBox;
@@ -213,23 +213,21 @@ namespace Tp1Echec
             pb.Image = Properties.Resources.cavalierBlanc;
             pb.Tag = "WKnight";
             pb.BringToFront();
-        }
+        }*/
 
         public void AbandonnerPartie()
         {
 
+            Program.AbandonnerPartie();
+            MessageBox.Show("La partie a été abandonnée.");
 
         }
 
         public void DemanderNulle()
         {
 
-
-        }
-
-        public void QuitterProgramme()
-        {
-
+            Program.DemanderUneNulle();
+            MessageBox.Show("Demande de nulle envoyée.");
 
         }
 

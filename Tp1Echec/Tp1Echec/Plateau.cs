@@ -341,9 +341,47 @@ namespace Tp1Echec
 
             // TODO: Prise en passant — réimplémenter avec polymorphisme (PriseEnPassant() sur Pion).
             // Le pion capturé est sur (x2, y1) : même colonne que destination, même rangée que pion
+            if (piece is Pion pion)
+            {
+                int direction = pion.PieceEstBlanche ? 1 : -1;
+
+                // Si le pion capture en diagonale mais la destination est vide -> prise en passant
+                if (Math.Abs(dx) == 1 && dy == direction && _grillage[x2, y2] == null)
+                {
+                    _grillage[x2, y1] = null; // retirer le pion capturé
+                }
+
+                // Double avance
+                if (dx == 0 && Math.Abs(dy) == 2)
+                {
+                    _dernierPionDoubleAvance = (x2, y2);
+                }
+
+                // Promotion automatique
+                int derniereLigne = pion.PieceEstBlanche ? 7 : 0;
+                if (y2 == derniereLigne)
+                {
+                    _grillage[x2, y2] = new Dame(pion.PieceEstBlanche, true);
+                    _grillage[x1, y1] = null;
+                    return; // La promotion remplace le pion, fin du coup
+                }
+            }
+
 
             // TODO: Roque — réimplémenter avec polymorphisme (PeutInitierRoque() / PeutSuivreRoque()).
             // Côté roi (dx=+2) : Tour de col 7 → col 5 ; côté dame (dx=-2) : Tour de col 0 → col 3
+            if (piece.PeutInitierRoque() && Math.Abs(x2 - x1) == 2)
+            {
+                int direction = (x2 - x1) / 2; // +2 ou -2
+                int tourXDepart = direction > 0 ? 7 : 0;
+                int tourXArrivee = direction > 0 ? 5 : 3;
+
+                Piece tour = _grillage[tourXDepart, y1];
+                _grillage[tourXArrivee, y1] = tour;
+                _grillage[tourXDepart, y1] = null;
+                tour.SetPieceABouge(true);
+            }
+
 
             // Déplacer la pièce principale
             _grillage[x2, y2] = piece;

@@ -10,22 +10,35 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
-    public partial class Form1 : Form
+    public partial class VuePrincipale : Form
     {
-        public Form1()
+
+
+        public VuePrincipale()
         {
             InitializeComponent();
+
+            
+            DemarrerNouvellePartie();
+
         }
 
         public void DemarrerNouvellePartie()
         {
+
+            Program.DemarrerPartie();
+
+            //string plateau = Program.AfficherPlateau();
+            //MessageBox.Show(plateau);
 
         }
 
         public void QuitterProgramme()
         {
 
+            Program.QuitterProgramme();
 
         }
+
     }
 }

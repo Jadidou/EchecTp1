@@ -28,12 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.txtBoxAjouterJoueur = new System.Windows.Forms.TextBox();
+            this.btnAjouterJoueur = new System.Windows.Forms.Button();
+            this.listBoxJoueurs = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // txtBoxAjouterJoueur
+            // 
+            this.txtBoxAjouterJoueur.Location = new System.Drawing.Point(14, 295);
+            this.txtBoxAjouterJoueur.Name = "txtBoxAjouterJoueur";
+            this.txtBoxAjouterJoueur.Size = new System.Drawing.Size(180, 20);
+            this.txtBoxAjouterJoueur.TabIndex = 0;
+            // 
+            // btnAjouterJoueur
+            // 
+            this.btnAjouterJoueur.Location = new System.Drawing.Point(14, 337);
+            this.btnAjouterJoueur.Name = "btnAjouterJoueur";
+            this.btnAjouterJoueur.Size = new System.Drawing.Size(180, 41);
+            this.btnAjouterJoueur.TabIndex = 1;
+            this.btnAjouterJoueur.Text = "Ajouter un joueur";
+            this.btnAjouterJoueur.UseVisualStyleBackColor = true;
+            this.btnAjouterJoueur.Click += new System.EventHandler(this.AjouterJoueur);
+            // 
+            // listBoxJoueurs
+            // 
+            this.listBoxJoueurs.FormattingEnabled = true;
+            this.listBoxJoueurs.Location = new System.Drawing.Point(14, 143);
+            this.listBoxJoueurs.Name = "listBoxJoueurs";
+            this.listBoxJoueurs.Size = new System.Drawing.Size(180, 134);
+            this.listBoxJoueurs.TabIndex = 2;
+            // 
+            // VueJoueur
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "VueJoueur";
+            this.Controls.Add(this.listBoxJoueurs);
+            this.Controls.Add(this.btnAjouterJoueur);
+            this.Controls.Add(this.txtBoxAjouterJoueur);
+            this.Name = "VueJoueur";
+            this.Size = new System.Drawing.Size(213, 450);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox txtBoxAjouterJoueur;
+        private System.Windows.Forms.Button btnAjouterJoueur;
+        private System.Windows.Forms.ListBox listBoxJoueurs;
     }
 }

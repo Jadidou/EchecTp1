@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Tp1Echec
 {
@@ -80,7 +82,7 @@ namespace Tp1Echec
 
             _partie = new Partie(blanc, noir);
 
-            _partie.DemarRerPartie();
+            _partie.DemarrerPartie();
 
         }
 
@@ -132,6 +134,32 @@ namespace Tp1Echec
 
             _listeJoueur.Add(joueur);
 
+        }
+
+        public void ChargerJoueursDepuisFichier(string chemin)
+        {
+            _listeJoueur.Clear();
+
+            //MessageBox.Show("Chemin utilisé : " + chemin); // DEBUG
+
+            if (!File.Exists(chemin))
+            {
+                MessageBox.Show("FICHIER INTROUVABLE ❌");
+                return;
+            }
+
+            foreach (string ligne in File.ReadAllLines(chemin))
+            {
+                //MessageBox.Show("Ligne lue : " + ligne); // DEBUG
+
+                if (!string.IsNullOrWhiteSpace(ligne))
+                {
+                    Joueur j = Joueur.ChargerDepuisFichier(ligne);
+                    _listeJoueur.Add(j);
+                }
+            }
+
+            //MessageBox.Show("Nombre de joueurs : " + _listeJoueur.Count); // DEBUG
         }
 
         //destructeur
