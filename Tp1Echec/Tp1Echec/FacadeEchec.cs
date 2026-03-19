@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Tp1Echec
@@ -71,19 +72,45 @@ namespace Tp1Echec
         }
 
         // Démarre une partie
-        public void DemarrerPartie()
+        public void DemarrerPartie(string joueurBlanc, string joueurNoir)
         {
-
             if (_listeJoueur.Count < 2)
-                return;
+                throw new Exception("Pas assez de joueurs pour démarrer une partie.");
 
-            Joueur blanc = _listeJoueur[0];
-            Joueur noir = _listeJoueur[1];
+            joueurBlanc = joueurBlanc.Trim();
+            joueurNoir = joueurNoir.Trim();
+
+            string pattern = @"^Joueur: ([^,]+), Pointage: \d+$";
+
+            // Extraire nom joueur blanc
+            Match matchBlanc = Regex.Match(joueurBlanc, pattern);
+            if (!matchBlanc.Success)
+                throw new Exception("Format du joueur blanc invalide.");
+
+            string nomBlanc = matchBlanc.Groups[1].Value;
+
+            // Extraire nom joueur noir
+            Match matchNoir = Regex.Match(joueurNoir, pattern);
+            if (!matchNoir.Success)
+                throw new Exception("Format du joueur noir invalide.");
+
+            string nomNoir = matchNoir.Groups[1].Value;
+
+            // Trouver les joueurs dans la liste
+            Joueur blanc = _listeJoueur.FirstOrDefault(j => j.nomJoueur == nomBlanc);
+            Joueur noir = _listeJoueur.FirstOrDefault(j => j.nomJoueur == nomNoir);
+
+            if (blanc == null)
+                throw new Exception("Joueur blanc introuvable.");
+
+            if (noir == null)
+                throw new Exception("Joueur noir introuvable.");
+
+            if (blanc == noir)
+                throw new Exception("Les deux joueurs doivent être différents.");
 
             _partie = new Partie(blanc, noir);
-
             _partie.DemarrerPartie();
-
         }
 
         // Abandonner la partie
@@ -144,7 +171,7 @@ namespace Tp1Echec
 
             if (!File.Exists(chemin))
             {
-                MessageBox.Show("FICHIER INTROUVABLE ❌");
+                MessageBox.Show("FICHIER INTROUVABLE");
                 return;
             }
 

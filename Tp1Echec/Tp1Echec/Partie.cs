@@ -77,14 +77,16 @@ namespace Tp1Echec
         public bool VerificationNulleParBoucle()
         {
 
-            if (_pileEtatPlateau.Count < 3)
+            int countBoucle = 5;
+
+            if (_pileEtatPlateau.Count < countBoucle)
                 return false;
 
             string dernier = _pileEtatPlateau.Last();
 
             int count = _pileEtatPlateau.Count(x => x == dernier);
 
-            return count >= 3;
+            return count >= countBoucle;
 
         }
 

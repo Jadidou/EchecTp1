@@ -37,10 +37,10 @@ namespace Tp1Echec
             return _facade.JouerCoup(x, y);
         }
 
-        public static void DemarrerPartie()
+        public static void DemarrerPartie(string joueurBlanc, string joueurNoir)
         {
 
-            _facade.DemarrerPartie();
+            _facade.DemarrerPartie(joueurBlanc, joueurNoir);
 
         }
 
