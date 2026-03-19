@@ -17,6 +17,7 @@ namespace Tp1Echec
         private PictureBox dragSource = null;
         private Point dragOffset;
         private Point dragOriginalLocation;
+        private bool partieEnCours = false;
 
         public VuePlateau()
         {
@@ -214,6 +215,110 @@ namespace Tp1Echec
             pb.Tag = "WKnight";
             pb.BringToFront();
         }*/
+
+        private void InitialiserPieces()
+        {
+            if (this.PlateauEchec == null) return;
+
+            foreach (PictureBox pb in this.PlateauEchec.Controls.OfType<PictureBox>())
+            {
+                if (pb == null) continue;
+
+                string caseName = pb.Name; // ex: "A1"
+                string piece = "";
+
+                //GROS SWITCH
+                switch (caseName)
+                {
+                    // ===== PIÈCES NOIRES =====
+                    case "A8": piece = "BR"; break;
+                    case "B8": piece = "BN"; break;
+                    case "C8": piece = "BB"; break;
+                    case "D8": piece = "BQ"; break;
+                    case "E8": piece = "BK"; break;
+                    case "F8": piece = "BB"; break;
+                    case "G8": piece = "BN"; break;
+                    case "H8": piece = "BR"; break;
+
+                    case "A7":
+                    case "B7":
+                    case "C7":
+                    case "D7":
+                    case "E7":
+                    case "F7":
+                    case "G7":
+                    case "H7":
+                        piece = "BP";
+                        break;
+
+                    // ===== PIÈCES BLANCHES =====
+                    case "A1": piece = "WR"; break;
+                    case "B1": piece = "WN"; break;
+                    case "C1": piece = "WB"; break;
+                    case "D1": piece = "WQ"; break;
+                    case "E1": piece = "WK"; break;
+                    case "F1": piece = "WB"; break;
+                    case "G1": piece = "WN"; break;
+                    case "H1": piece = "WR"; break;
+
+                    case "A2":
+                    case "B2":
+                    case "C2":
+                    case "D2":
+                    case "E2":
+                    case "F2":
+                    case "G2":
+                    case "H2":
+                        piece = "WP";
+                        break;
+
+                    default:
+                        piece = null;
+                        break;
+                }
+
+                //Placement visuel
+                if (piece != null)
+                {
+                    pb.Tag = piece;
+
+                    switch (piece)
+                    {
+                        // Blanc
+                        case "WP": pb.Image = Properties.Resources.pionBlanc; break;
+                        case "WR": pb.Image = Properties.Resources.tourBlanc; break;
+                        case "WN": pb.Image = Properties.Resources.cavalierBlanc; break;
+                        case "WB": pb.Image = Properties.Resources.fouBlanc; break;
+                        case "WQ": pb.Image = Properties.Resources.reineBlanc; break;
+                        case "WK": pb.Image = Properties.Resources.roiBlanc; break;
+
+                        // Noir
+                        case "BP": pb.Image = Properties.Resources.pionNoir; break;
+                        case "BR": pb.Image = Properties.Resources.tourNoir; break;
+                        case "BN": pb.Image = Properties.Resources.cavalierNoir; break;
+                        case "BB": pb.Image = Properties.Resources.fouNoir; break;
+                        case "BQ": pb.Image = Properties.Resources.reineNoir; break;
+                        case "BK": pb.Image = Properties.Resources.roiNoir; break;
+                    }
+
+                    pb.BringToFront();
+                }
+                else
+                {
+                    // case vide
+                    pb.Image = null;
+                    pb.Tag = null;
+                }
+            }
+        }
+
+        public void DemarrerPartie()
+        {
+            //Program.DemarrerPartie();
+            //MessageBox.Show("La partie a commencé.");
+            partieEnCours = true;
+            InitialiserPieces();
+        }
 
         public void AbandonnerPartie()
         {
