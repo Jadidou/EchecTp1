@@ -22,9 +22,9 @@ namespace Tp1Echec
         {
             listBoxJoueurs.Items.Clear();
 
-            Program.ChargerJoueurs();
+            JeuEchec.ChargerJoueurs();
 
-            string liste = Program.ConsulterListeJoueur();
+            string liste = JeuEchec.ConsulterListeJoueur();
 
             foreach (string ligne in liste.Split('\n'))
             {
@@ -38,7 +38,7 @@ namespace Tp1Echec
         public void VoirPointageJoueurs()
         {
 
-            string liste = Program.ConsulterListeJoueur();
+            string liste = JeuEchec.ConsulterListeJoueur();
             MessageBox.Show("Pointages :\n" + liste);
 
         }

@@ -162,7 +162,7 @@ namespace Tp1Echec
                 // Appel au contrôleur pour valider et appliquer la logique métier
                 try
                 {
-                    int result = Program.JouerCoup(srcName, dstName);
+                    int result = JeuEchec.JouerCoup(srcName, dstName);
                     if (result == 1)
                     {
                         // Le contrôleur a validé : mise à jour visuelle :
@@ -323,7 +323,7 @@ namespace Tp1Echec
         public void AbandonnerPartie()
         {
 
-            Program.AbandonnerPartie();
+            JeuEchec.AbandonnerPartie();
             MessageBox.Show("La partie a été abandonnée.");
 
         }
@@ -331,7 +331,7 @@ namespace Tp1Echec
         public void DemanderNulle()
         {
 
-            Program.DemanderUneNulle();
+            JeuEchec.DemanderUneNulle();
             MessageBox.Show("Demande de nulle envoyée.");
 
         }

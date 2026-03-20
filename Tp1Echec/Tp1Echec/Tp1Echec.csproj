@@ -77,7 +77,7 @@
     <Compile Include="VuePrincipale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include=".Designer.cs">
+    <Compile Include="VuePrincipale.Designer.cs">
       <DependentUpon>VuePrincipale.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
