@@ -53,9 +53,9 @@ namespace Tp1Echec
 
             try
             {
-                Program.DemarrerPartie(joueurBlanc, joueurNoir);
+                JeuEchec.DemarrerPartie(joueurBlanc, joueurNoir);
                 _plateau.DemarrerPartie();
-                Program.AfficherPlateau();
+                JeuEchec.AfficherPlateau();
                 MessageBox.Show("La partie a commencé !");
             }
             catch (Exception ex)
@@ -70,9 +70,9 @@ namespace Tp1Echec
             cbJoueurBlanc.Items.Clear();
             cbJoueurNoir.Items.Clear();
 
-            Program.ChargerJoueurs();
+            JeuEchec.ChargerJoueurs();
 
-            string liste = Program.ConsulterListeJoueur();
+            string liste = JeuEchec.ConsulterListeJoueur();
 
             foreach (string ligne in liste.Split('\n'))
             {
@@ -90,7 +90,7 @@ namespace Tp1Echec
         public void QuitterProgramme()
         {
 
-            Program.QuitterProgramme();
+            JeuEchec.QuitterProgramme();
 
         }
 

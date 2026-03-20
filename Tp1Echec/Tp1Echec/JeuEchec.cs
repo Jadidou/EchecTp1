@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
-    public static class Program
+    public static class JeuEchec
     {
 
         //attribut
