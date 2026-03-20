@@ -1,0 +1,8 @@
+*.laurie.md
+.vs
+Tp1Echec/.vs
+Tp1Echec/packages
+Tp1Echec/TestsUnitaires
+Tp1Echec/Tp1Echec/bin
+Tp1Echec/Tp1Echec/obj
+Tp1Echec/Tp1Echec/.vs
