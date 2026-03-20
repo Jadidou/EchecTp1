@@ -118,7 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="reineBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reineBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cavalierBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cavalierBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fouBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fouBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fouNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fouNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="roiNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\roiNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tourBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tourBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="roiBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\roiBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reineNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reineNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cavalierNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cavalierNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pionBlanc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pionBlanc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Charles_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Charles_v2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pionNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pionNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tourNoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tourNoir1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

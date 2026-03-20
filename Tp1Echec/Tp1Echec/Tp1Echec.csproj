@@ -51,6 +51,12 @@
     <Compile Include="Coup.cs" />
     <Compile Include="Dame.cs" />
     <Compile Include="FacadeEchec.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fou.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Partie.cs" />
@@ -83,6 +89,9 @@
     </Compile>
     <Compile Include="JeuEchec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -91,6 +100,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="VueJoueur.resx">
       <DependentUpon>VueJoueur.cs</DependentUpon>
@@ -113,6 +123,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Joueur.txt" />
+    <None Include="Resources\tourNoir1.png" />
+    <None Include="Resources\tourBlanc1.png" />
+    <None Include="Resources\roiNoir1.png" />
+    <None Include="Resources\roiBlanc1.png" />
+    <None Include="Resources\reineNoir1.png" />
+    <None Include="Resources\reineBlanc1.png" />
+    <None Include="Resources\pionNoir1.png" />
+    <None Include="Resources\pionBlanc1.png" />
+    <None Include="Resources\fouNoir1.png" />
+    <None Include="Resources\fouBlanc1.png" />
+    <None Include="Resources\cavalierNoir1.png" />
+    <None Include="Resources\cavalierBlanc1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
