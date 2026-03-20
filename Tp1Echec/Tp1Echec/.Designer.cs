@@ -42,18 +42,18 @@
             // txtBienvenue
             // 
             this.txtBienvenue.AutoSize = true;
-            this.txtBienvenue.Location = new System.Drawing.Point(94, 49);
-            this.txtBienvenue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.txtBienvenue.Location = new System.Drawing.Point(63, 32);
             this.txtBienvenue.Name = "txtBienvenue";
-            this.txtBienvenue.Size = new System.Drawing.Size(222, 20);
+            this.txtBienvenue.Size = new System.Drawing.Size(152, 13);
             this.txtBienvenue.TabIndex = 1;
             this.txtBienvenue.Text = "Bienvenue a notre jeu d\'echec";
             // 
             // btnDemarrerPartie
             // 
-            this.btnDemarrerPartie.Location = new System.Drawing.Point(74, 405);
+            this.btnDemarrerPartie.Location = new System.Drawing.Point(52, 185);
+            this.btnDemarrerPartie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDemarrerPartie.Name = "btnDemarrerPartie";
-            this.btnDemarrerPartie.Size = new System.Drawing.Size(266, 59);
+            this.btnDemarrerPartie.Size = new System.Drawing.Size(177, 38);
             this.btnDemarrerPartie.TabIndex = 3;
             this.btnDemarrerPartie.Text = "Démarrer la partie";
             this.btnDemarrerPartie.UseVisualStyleBackColor = true;
@@ -62,58 +62,61 @@
             // cbJoueurNoir
             // 
             this.cbJoueurNoir.FormattingEnabled = true;
-            this.cbJoueurNoir.Location = new System.Drawing.Point(74, 371);
+            this.cbJoueurNoir.Location = new System.Drawing.Point(52, 163);
+            this.cbJoueurNoir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbJoueurNoir.Name = "cbJoueurNoir";
-            this.cbJoueurNoir.Size = new System.Drawing.Size(266, 28);
+            this.cbJoueurNoir.Size = new System.Drawing.Size(179, 21);
             this.cbJoueurNoir.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(70, 336);
+            this.label1.Location = new System.Drawing.Point(50, 140);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 20);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Joueur noir";
             // 
             // cbJoueurBlanc
             // 
             this.cbJoueurBlanc.FormattingEnabled = true;
-            this.cbJoueurBlanc.Location = new System.Drawing.Point(74, 293);
+            this.cbJoueurBlanc.Location = new System.Drawing.Point(52, 112);
+            this.cbJoueurBlanc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbJoueurBlanc.Name = "cbJoueurBlanc";
-            this.cbJoueurBlanc.Size = new System.Drawing.Size(266, 28);
+            this.cbJoueurBlanc.Size = new System.Drawing.Size(179, 21);
             this.cbJoueurBlanc.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(70, 260);
+            this.label2.Location = new System.Drawing.Point(50, 91);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Joueur blanc";
             // 
             // vueJoueur1
             // 
-            this.vueJoueur1.Location = new System.Drawing.Point(49, 452);
-            this.vueJoueur1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.vueJoueur1.Location = new System.Drawing.Point(32, 256);
             this.vueJoueur1.Name = "vueJoueur1";
-            this.vueJoueur1.Size = new System.Drawing.Size(320, 414);
+            this.vueJoueur1.Size = new System.Drawing.Size(213, 269);
             this.vueJoueur1.TabIndex = 2;
             // 
             // vuePlateau1
             // 
-            this.vuePlateau1.Location = new System.Drawing.Point(322, 15);
-            this.vuePlateau1.Margin = new System.Windows.Forms.Padding(2);
+            this.vuePlateau1.Location = new System.Drawing.Point(215, 10);
+            this.vuePlateau1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.vuePlateau1.Name = "vuePlateau1";
-            this.vuePlateau1.Size = new System.Drawing.Size(957, 851);
+            this.vuePlateau1.Size = new System.Drawing.Size(638, 553);
             this.vuePlateau1.TabIndex = 0;
             // 
             // VuePrincipale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1298, 911);
+            this.ClientSize = new System.Drawing.Size(865, 592);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbJoueurBlanc);
             this.Controls.Add(this.label1);
@@ -122,6 +125,7 @@
             this.Controls.Add(this.vueJoueur1);
             this.Controls.Add(this.txtBienvenue);
             this.Controls.Add(this.vuePlateau1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "VuePrincipale";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
