@@ -12,19 +12,14 @@ namespace Tp1Echec
 {
     public partial class VuePlateau : UserControl
     {
-        // état du drag
-        private bool isDragging = false;
-        private PictureBox dragSource = null;
-        private Point dragOffset;
-        private Point dragOriginalLocation;
+        PictureBox caseSelectionnee = null;
         private bool partieEnCours = false;
 
         public VuePlateau()
         {
             InitializeComponent();
             MakeSquaresTransparent();
-            AttachSquareEvents();
-            //PlaceWhiteKnight();
+            AttachEvents();
         }
 
         private void MakeSquaresTransparent()
@@ -51,170 +46,65 @@ namespace Tp1Echec
             }
         }
 
-        // Attache les événements souris à chaque case (après MakeSquaresTransparent)
-        private void AttachSquareEvents()
+        // Attacher UN SEUL event : Click
+        private void AttachEvents()
         {
-            if (this.PlateauEchec == null) return;
-
-            foreach (var pb in this.PlateauEchec.Controls.OfType<PictureBox>())
+            foreach (var pb in PlateauEchec.Controls.OfType<PictureBox>())
             {
-                // ignore le plateau lui-même s'il était dans la liste
-                if (pb == null) continue;
-                // Attacher une fois seulement
-                pb.MouseDown -= Square_MouseDown;
-                pb.MouseMove -= Square_MouseMove;
-                pb.MouseUp -= Square_MouseUp;
-
-                pb.MouseDown += Square_MouseDown;
-                pb.MouseMove += Square_MouseMove;
-                pb.MouseUp += Square_MouseUp;
+                pb.Click -= Case_Click;
+                pb.Click += Case_Click;
             }
         }
 
-        private void Square_MouseDown(object sender, MouseEventArgs e)
+        // LOGIQUE CLICK CLICK
+        private void Case_Click(object sender, EventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return;
-            var pb = sender as PictureBox;
+            if (!partieEnCours) return;
+
+            PictureBox pb = sender as PictureBox;
             if (pb == null) return;
-            // ne démarrer que s'il y a une image (une pièce)
-            if (pb.Image == null && (pb.Tag == null || string.IsNullOrEmpty(pb.Tag.ToString()))) return;
 
-            isDragging = true;
-            dragSource = pb;
-            // Position du curseur relative à la PictureBox pour garder l'offset pendant le drag
-            dragOffset = e.Location;
-            dragOriginalLocation = pb.Location;
-            pb.BringToFront();
-            Cursor = Cursors.Hand;
-        }
-
-        private void Square_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!isDragging || dragSource == null) return;
-            // Position du curseur en coords du plateau
-            var plateau = this.PlateauEchec;
-            var cursorPt = plateau.PointToClient(Control.MousePosition);
-
-            // Calculer nouvelle position de la PictureBox en respectant l'offset initial
-            var newLocation = new Point(cursorPt.X - dragOffset.X, cursorPt.Y - dragOffset.Y);
-
-            // Optionnel : limiter afin que la PictureBox reste dans les limites du plateau
-            newLocation.X = Math.Max(0, Math.Min(newLocation.X, plateau.Width - dragSource.Width));
-            newLocation.Y = Math.Max(0, Math.Min(newLocation.Y, plateau.Height - dragSource.Height));
-
-            dragSource.Location = newLocation;
-        }
-
-        private void Square_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (!isDragging || dragSource == null) return;
-
-            var plateau = this.PlateauEchec;
-            var cursorPt = plateau.PointToClient(Control.MousePosition);
-
-            // Trouver la case cible sous le curseur
-            var target = plateau.GetChildAtPoint(cursorPt) as PictureBox;
-
-            // Si la cible est la même que la source (la PictureBox déplacée recouvre la case),
-            // masquer temporairement la source pour récupérer la case en dessous.
-            if (target == dragSource)
+            // 🔹 1er clic → sélectionner
+            if (caseSelectionnee == null)
             {
-                dragSource.Visible = false;
-                try
-                {
-                    target = plateau.GetChildAtPoint(cursorPt) as PictureBox;
-                }
-                finally
-                {
-                    dragSource.Visible = true;
-                }
+                if (pb.Image == null) return; // pas de pièce
+
+                caseSelectionnee = pb;
+                pb.BorderStyle = BorderStyle.Fixed3D; // visuel sélection
+                return;
             }
 
-            // Si GetChildAtPoint retourne null (par ex. sur les bords), fallback sur le centre du dragSource
-            if (target == null)
-            {
-                var center = new Point(dragSource.Location.X + dragSource.Width / 2,
-                                       dragSource.Location.Y + dragSource.Height / 2);
-                // si centre retourne la source, masquer temporairement aussi
-                var centerTarget = plateau.GetChildAtPoint(center) as PictureBox;
-                if (centerTarget == dragSource)
-                {
-                    dragSource.Visible = false;
-                    try
-                    {
-                        centerTarget = plateau.GetChildAtPoint(center) as PictureBox;
-                    }
-                    finally
-                    {
-                        dragSource.Visible = true;
-                    }
-                }
-                target = centerTarget;
-            }
-
-            // Déterminer noms source / destination
-            string srcName = dragSource?.Name;
-            string dstName = target?.Name;
+            // 🔹 2e clic → destination
+            string src = caseSelectionnee.Name;
+            string dst = pb.Name;
 
             bool moved = false;
-            if (!string.IsNullOrEmpty(srcName) && !string.IsNullOrEmpty(dstName) && srcName != dstName)
+
+            try
             {
-                // Appel au contrôleur pour valider et appliquer la logique métier
-                try
+                int result = JeuEchec.JouerCoup(src, dst);
+
+                if (result == 1)
                 {
-                    int result = JeuEchec.JouerCoup(srcName, dstName);
-                    if (result == 1)
-                    {
-                        // Le contrôleur a validé : mise à jour visuelle :
-                        target.Image = dragSource.Image;
-                        target.Tag = dragSource.Tag;
-                        dragSource.Image = null;
-                        dragSource.Tag = null;
-                        target.BringToFront();
-                        moved = true;
-                    }
-                    else
-                    {
-                        // coup refusé : revenir en arrière
-                        moved = false;
-                    }
-                }
-                catch
-                {
-                    // Si exception controller, considérer comme refusé.
-                    moved = false;
+                    // déplacement visuel
+                    pb.Image = caseSelectionnee.Image;
+                    pb.Tag = caseSelectionnee.Tag;
+
+                    caseSelectionnee.Image = null;
+                    caseSelectionnee.Tag = null;
+
+                    moved = true;
                 }
             }
-
-            if (!moved)
+            catch
             {
-                // Repositionner la case source à sa position d'origine
-                dragSource.Location = dragOriginalLocation;
-            }
-            else
-            {
-                // Les PictureBox représentent des cases fixes : laisser la source à sa position d'origine.
-                dragSource.Location = dragOriginalLocation;
+                moved = false;
             }
 
-            // Reset état drag
-            isDragging = false;
-            dragSource = null;
-            Cursor = Cursors.Default;
+            // reset visuel
+            caseSelectionnee.BorderStyle = BorderStyle.None;
+            caseSelectionnee = null;
         }
-
-        // place un cavalier blanc de test (image depuis resources) sur B1 et tague "WKnight"
-        /*private void PlaceWhiteKnight()
-        {
-            if (this.PlateauEchec == null) return;
-            var pb = this.PlateauEchec.Controls.Find("B1", true).FirstOrDefault() as PictureBox;
-            if (pb == null) return;
-
-            // Utilise l'image existante dans les ressources : Properties.Resources.cavalierBlanc
-            pb.Image = Properties.Resources.cavalierBlanc;
-            pb.Tag = "WKnight";
-            pb.BringToFront();
-        }*/
 
         private void InitialiserPieces()
         {
@@ -301,7 +191,9 @@ namespace Tp1Echec
                         case "BK": pb.Image = Properties.Resources.roiNoir; break;
                     }
 
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
                     pb.BringToFront();
+                    pb.Refresh();
                 }
                 else
                 {
@@ -309,7 +201,11 @@ namespace Tp1Echec
                     pb.Image = null;
                     pb.Tag = null;
                 }
+
+                pb.BorderStyle = BorderStyle.None;
+               // MessageBox.Show(pb.Name);
             }
+
         }
 
         public void DemarrerPartie()
@@ -318,6 +214,14 @@ namespace Tp1Echec
             //MessageBox.Show("La partie a commencé.");
             partieEnCours = true;
             InitialiserPieces();
+        }
+
+        public void RefreshPlateau()
+        {
+            // Cette méthode peut être appelée par le contrôleur pour forcer une mise à jour visuelle du plateau
+            // en cas de changements externes.
+            //if (!partieEnCours) return;
+            //InitialiserPieces();
         }
 
         public void AbandonnerPartie()
@@ -338,27 +242,16 @@ namespace Tp1Echec
 
         public void MovePieceOnView(string from, string to)
         {
-            if (this.PlateauEchec == null) return;
-            var src = this.PlateauEchec.Controls.Find(from, true).FirstOrDefault() as PictureBox;
-            var dst = this.PlateauEchec.Controls.Find(to, true).FirstOrDefault() as PictureBox;
+            var src = PlateauEchec.Controls.Find(from, true).FirstOrDefault() as PictureBox;
+            var dst = PlateauEchec.Controls.Find(to, true).FirstOrDefault() as PictureBox;
+
             if (src == null || dst == null) return;
 
             dst.Image = src.Image;
             dst.Tag = src.Tag;
+
             src.Image = null;
             src.Tag = null;
-            dst.BringToFront();
-        }
-
-        public void SetPieceOnView(string square, Image image, string tag)
-        {
-            if (this.PlateauEchec == null) return;
-            var pb = this.PlateauEchec.Controls.Find(square, true).FirstOrDefault() as PictureBox;
-            if (pb == null) return;
-
-            pb.Image = image;
-            pb.Tag = tag;
-            pb.BringToFront();
         }
 
     }
