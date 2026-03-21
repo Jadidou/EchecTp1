@@ -168,6 +168,11 @@ namespace Tp1Echec
 
         }
 
+        public CodeEtatPartie VerifierEtatPartie()
+        {
+            return _partie.VerifierEtatPartie();
+        }
+
         // Ajouter un joueur
         public void AjouterJoueur(string nom)
         {

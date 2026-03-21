@@ -58,6 +58,11 @@ namespace Tp1Echec
 
         }
 
+        public static CodeEtatPartie VerifierEtatPartie()
+        {
+            return _facade.VerifierEtatPartie();
+        }
+
         public static string AfficherPlateau()
         {
 

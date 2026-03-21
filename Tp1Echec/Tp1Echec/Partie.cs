@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Tp1Echec
 {
@@ -77,7 +78,7 @@ namespace Tp1Echec
         public bool VerificationNulleParBoucle()
         {
 
-            int countBoucle = 5;
+            int countBoucle = 3;
 
             if (_pileEtatPlateau.Count < countBoucle)
                 return false;
@@ -88,6 +89,25 @@ namespace Tp1Echec
 
             return count >= countBoucle;
 
+        }
+
+        public CodeEtatPartie VerifierEtatPartie()
+        {
+            if (_pilePlateau.Count == 0)
+                return CodeEtatPartie.OK;
+
+            Plateau plateauActuel = _pilePlateau.Peek();
+
+            //priorité à la nulle par répétition
+            if (VerificationNulleParBoucle())
+            { 
+                _joueurBlanc.AjusterPoint(0);
+                _joueurNoir.AjusterPoint(0);
+                return CodeEtatPartie.Nulle;
+            }
+
+            //sinon on vérifie l'état normal
+            return plateauActuel.VerifierEtatPartie(_tourBlanc);
         }
 
         // Ajuste le pointage (ex: abandon, mat, nulle)
@@ -127,8 +147,13 @@ namespace Tp1Echec
             }
 
             // Vérifier le coup
-            if (!plateauActuel.ValiderCoup(coup))
-                return -3; // coup illégal
+            /*if (!plateauActuel.ValiderCoup(coup))
+                return -3;*/ // coup illégal
+
+            var code = plateauActuel.ValiderCoup(coup);
+
+            if (code != CodeErreurCoup.OK)
+                return -(int)code;
 
             // clone du plateau avant de jouer (TRÈS IMPORTANT)
             Plateau nouveauPlateau = new Plateau(plateauActuel);
@@ -142,6 +167,25 @@ namespace Tp1Echec
 
             // Changer de tour
             _tourBlanc = !_tourBlanc;
+
+            // Vérifier état de la partie après le coup
+            Plateau plateauCourant = _pilePlateau.Peek();
+
+            if (plateauCourant.VerificationEchecMat(_tourBlanc))
+            {
+                // Le joueur actuel est mat → il perd
+                AjusterPointage(!_tourBlanc);
+            }
+            else if (plateauCourant.VerificationEchecPat(_tourBlanc))
+            {
+                _joueurBlanc.AjusterPoint(0);
+                _joueurNoir.AjusterPoint(0);
+            }
+            else if (VerificationNulleParBoucle())
+            {
+                _joueurBlanc.AjusterPoint(0);
+                _joueurNoir.AjusterPoint(0);
+            }
 
             return 1;
 

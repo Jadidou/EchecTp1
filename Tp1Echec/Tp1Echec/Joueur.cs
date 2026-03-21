@@ -49,7 +49,7 @@ namespace Tp1Echec
             // On ajoute les points au pointage actuel
             _pointage += points;
 
-            // Optionnel : empêcher le pointage d'être négatif
+            // empêcher le pointage d'être négatif
             if (_pointage < 0)
                 _pointage = 0;
 

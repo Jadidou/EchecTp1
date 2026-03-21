@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="AvecLimite.cs" />
     <Compile Include="Cavalier.cs" />
+    <Compile Include="CodeErreurCoup.cs" />
+    <Compile Include="CodeEtatPartie.cs" />
     <Compile Include="Coup.cs" />
     <Compile Include="Dame.cs" />
     <Compile Include="FacadeEchec.cs" />

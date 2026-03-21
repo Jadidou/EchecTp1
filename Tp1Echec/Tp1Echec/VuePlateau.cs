@@ -64,7 +64,7 @@ namespace Tp1Echec
             PictureBox pb = sender as PictureBox;
             if (pb == null) return;
 
-            // 🔹 1er clic → sélectionner
+            // 1er clic → sélectionner
             if (caseSelectionnee == null)
             {
                 if (pb.Image == null) return; // pas de pièce
@@ -83,6 +83,71 @@ namespace Tp1Echec
             try
             {
                 int result = JeuEchec.JouerCoup(src, dst);
+
+                if (result != 1)
+                {
+                    string message = "";
+
+                    switch (-result)
+                    {
+                        case 1:
+                            message = "Tu dois déplacer la pièce.";
+                            break;
+                        case 3:
+                            message = "Aucune pièce sélectionnée.";
+                            break;
+                        case 4:
+                            message = "Ce n'est pas ton tour.";
+                            break;
+                        case 5:
+                            message = "Impossible de manger ta propre pièce.";
+                            break;
+                        case 7:
+                            message = "Une pièce bloque le chemin.";
+                            break;
+                        case 8:
+                            message = "Ce coup te met en échec.";
+                            break;
+                        default:
+                            message = "Coup invalide.";
+                            break;
+                    }
+
+                    MessageBox.Show(message);
+
+                    // RESET OBLIGATOIRE
+                    caseSelectionnee.BorderStyle = BorderStyle.None;
+                    caseSelectionnee = null;
+
+                    return;
+                }
+
+                CodeEtatPartie etat = JeuEchec.VerifierEtatPartie();
+
+                if (etat != CodeEtatPartie.OK)
+                {
+                    switch (etat)
+                    {
+                        case CodeEtatPartie.Echec:
+                            MessageBox.Show("Échec !");
+                            break;
+
+                        case CodeEtatPartie.EchecEtMat:
+                            MessageBox.Show("Échec et mat !");
+                            partieEnCours = false;
+                            break;
+
+                        case CodeEtatPartie.Pat:
+                            MessageBox.Show("Pat !");
+                            partieEnCours = false;
+                            break;
+
+                        case CodeEtatPartie.Nulle:
+                            MessageBox.Show("Partie nulle (répétition) !");
+                            partieEnCours = false;
+                            break;
+                    }
+                }
 
                 if (result == 1)
                 {

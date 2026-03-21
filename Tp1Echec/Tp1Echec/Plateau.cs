@@ -53,6 +53,8 @@ namespace Tp1Echec
 
         // Méthodes
 
+        
+
         // DONE
         // Initialise le plateau en position de départ standard des échecs.
         // Utilise des indices 0-based : col 0=a..7=h, row 0=rangée 1..7=rangée 8.
@@ -148,7 +150,7 @@ namespace Tp1Echec
         // Retourne false dès qu'une règle est violée (validation en court-circuit).
         // Délègue la géométrie à piece.ValiderCoup, le contexte du pion à ValiderCoupPion,
         // le roque à ValiderRoque, et vérifie via SimulerCoup qu'on ne se met pas en échec.
-        public bool ValiderCoup(Coup coup)
+        /*public bool ValiderCoup(Coup coup)
         {
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
             int x2 = coup.posFin.Item1, y2 = coup.posFin.Item2;
@@ -204,6 +206,64 @@ namespace Tp1Echec
                 return false;
 
             return true;
+        }*/
+
+        public CodeErreurCoup ValiderCoup(Coup coup)
+        {
+            int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
+            int x2 = coup.posFin.Item1, y2 = coup.posFin.Item2;
+
+            // Empêche un coup inutile (même case)
+            if (x1 == x2 && y1 == y2)
+                return CodeErreurCoup.MemeCase;
+
+            // 1. Positions valides
+            if (!(PositionDansPlateau(x1, y1) && PositionDansPlateau(x2, y2)))
+                return CodeErreurCoup.HorsPlateau;
+
+            // 2. Pièce présente
+            Piece piece = _grillage[x1, y1];
+            if (piece == null)
+                return CodeErreurCoup.AucunePiece;
+
+            // 3. Bon joueur
+            if (piece.PieceEstBlanche != coup.estTourBlanc)
+                return CodeErreurCoup.MauvaisTour;
+
+            // 4. Destination
+            Piece destination = _grillage[x2, y2];
+            if (destination != null && destination.PieceEstBlanche == coup.estTourBlanc
+                && !(piece.PeutInitierRoque() && !piece.PieceABouge() && destination.PeutSuivreRoque() && !destination.PieceABouge()))
+                return CodeErreurCoup.DestinationAlliee;
+
+            int dx = x2 - x1;
+            int dy = y2 - y1;
+
+            // 4.5 Roque
+            if (piece.PeutInitierRoque() && !piece.PieceABouge()
+                && destination != null && destination != piece && destination.PeutSuivreRoque() && !destination.PieceABouge())
+                return ValiderRoque(coup); // ⚠️ IMPORTANT : doit retourner CodeErreurCoup
+
+            // 5. Géométrie
+            if (!piece.ValiderCoup(coup))
+                return CodeErreurCoup.MouvementInvalide;
+
+            // 6. Pion
+            if (!ValiderCoupsPion(coup, piece, destination, dx, dy))
+                return CodeErreurCoup.CoupPionInvalide;
+
+            // 7. Collision
+            if (piece.CauseCollision())
+            {
+                if (!CheminLibre(coup))
+                    return CodeErreurCoup.Collision;
+            }
+
+            // 8. Échec
+            if (SimulerCoup(coup).VerificationEchec(coup.estTourBlanc))
+                return CodeErreurCoup.MetEnEchec;
+
+            return CodeErreurCoup.OK;
         }
 
         // Valide les règles contextuelles propres au pion.
@@ -281,7 +341,7 @@ namespace Tp1Echec
         // 1. Valide si le roque peut être fait. (SINON early return)
         // 2. Si correct, faire la validation que le chemin pour le roi est Safe (copier plateau, null où le roi est, nouveau roi à la première case intermédiaire, vérifierEchec(), si good, on recommence, jusqu'à atteindre la case destination) early return sinon.
         // 3. Si tout est parfait, on retourne true.
-        private bool ValiderRoque(Coup coup)
+        /*private bool ValiderRoque(Coup coup)
         {
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
             int x2 = coup.posFin.Item1,  y2 = coup.posFin.Item2;
@@ -314,6 +374,49 @@ namespace Tp1Echec
 
             // 3. Tout est valide
             return true;
+        }*/
+
+        private CodeErreurCoup ValiderRoque(Coup coup)
+        {
+            int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
+            int x2 = coup.posFin.Item1, y2 = coup.posFin.Item2;
+
+            // Le roque est horizontal
+            if (y1 != y2)
+                return CodeErreurCoup.RoqueInvalide;
+
+            Piece roi = _grillage[x1, y1];
+            Piece tour = _grillage[x2, y2];
+
+            // 1. Vérifier présence et type des pièces
+            if (roi == null || !roi.PeutInitierRoque() || roi.PieceABouge())
+                return CodeErreurCoup.RoqueInvalide;
+
+            if (tour == null || !tour.PeutSuivreRoque() || tour.PieceABouge())
+                return CodeErreurCoup.RoqueInvalide;
+
+            // 2. Chemin libre entre roi et tour
+            if (!CheminLibre(coup))
+                return CodeErreurCoup.Collision;
+
+            // 3. Vérifier que le roi ne traverse pas une case en échec
+            int direction = Math.Sign(x2 - x1);
+
+            for (int pas = 0; pas <= 2; pas++)
+            {
+                int caseRoi = x1 + pas * direction;
+
+                Plateau simulation = new Plateau(this);
+
+                simulation._grillage[x1, y1] = null;
+                simulation._grillage[caseRoi, y1] = roi;
+
+                if (simulation.VerificationEchec(coup.estTourBlanc))
+                    return CodeErreurCoup.MetEnEchec;
+            }
+
+            // 4. Tout est valide
+            return CodeErreurCoup.OK;
         }
 
         // Very bad (pas contente).
@@ -449,6 +552,36 @@ namespace Tp1Echec
             return copie;
         }
 
+        private bool JoueurAPossibleCoup(bool estBlanc)
+        {
+            for (int x1 = 0; x1 < 8; x1++)
+            {
+                for (int y1 = 0; y1 < 8; y1++)
+                {
+                    Piece piece = _grillage[x1, y1];
+
+                    if (piece == null || piece.PieceEstBlanche != estBlanc)
+                        continue;
+
+                    // Tester toutes les destinations
+                    for (int x2 = 0; x2 < 8; x2++)
+                    {
+                        for (int y2 = 0; y2 < 8; y2++)
+                        {
+                            Coup coupTest = new Coup((x1, y1), (x2, y2), estBlanc);
+
+                            CodeErreurCoup code = ValiderCoup(coupTest);
+
+                            if (code == CodeErreurCoup.OK)
+                                return true; // au moins un coup possible
+                        }
+                    }
+                }
+            }
+
+            return false; // aucun coup possible
+        }
+
         // Maybe good?
         // Génère tous les coups légaux disponibles pour la couleur donnée.
         // Teste les 64×64 paires (source, destination) possibles et filtre par ValiderCoup complet.
@@ -461,7 +594,14 @@ namespace Tp1Echec
         // Délègue à ObtenirTousCoupsPossibles pour énumérer tous les coups légaux.
         public bool VerificationEchecMat(bool estBlanc)
         {
-            // TODO: Implémenter via ObtenirTousCoupsPossibles (à réintégrer avec polymorphisme).
+            // 1. Le roi DOIT être en échec
+            if (!VerificationEchec(estBlanc))
+                return false;
+
+            // 2. Aucun coup possible
+            if (!JoueurAPossibleCoup(estBlanc))
+                return true;
+
             return false;
         }
 
@@ -470,8 +610,35 @@ namespace Tp1Echec
         // Délègue à ObtenirTousCoupsPossibles pour énumérer tous les coups légaux.
         public bool VerificationEchecPat(bool estBlanc)
         {
-            // TODO: Implémenter via ObtenirTousCoupsPossibles (à réintégrer avec polymorphisme).
+            // 1. Le roi NE DOIT PAS être en échec
+            if (VerificationEchec(estBlanc))
+                return false;
+
+            // 2. Aucun coup possible
+            if (!JoueurAPossibleCoup(estBlanc))
+                return true;
+
             return false;
+        }
+
+        public CodeEtatPartie VerifierEtatPartie(bool estBlanc)
+        {
+            bool echec = VerificationEchec(estBlanc);
+
+            // TEMPORAIRE (vu que tes méthodes sont pas finies)
+            bool mat = VerificationEchecMat(estBlanc);
+            bool pat = VerificationEchecPat(estBlanc);
+
+            if (mat)
+                return CodeEtatPartie.EchecEtMat;
+
+            if (pat)
+                return CodeEtatPartie.Pat;
+
+            if (echec)
+                return CodeEtatPartie.Echec;
+
+            return CodeEtatPartie.OK;
         }
 
         // Destructeur
