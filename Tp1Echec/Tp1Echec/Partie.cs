@@ -182,14 +182,13 @@ namespace Tp1Echec
         public void DemanderUneNulle()
         {
 
-            if (VerificationNulleParBoucle())
-            {
+            
                 _joueurBlanc.AjusterPoint(0);
                 _joueurNoir.AjusterPoint(0);
 
                 _pilePlateau.Clear();
                 _pileEtatPlateau.Clear();
-            }
+            
 
         }
 

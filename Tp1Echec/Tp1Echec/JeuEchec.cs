@@ -71,12 +71,12 @@ namespace Tp1Echec
             _facade.DemanderUneNulle();
 
         }
-        public static void AjouterJoueur(Joueur joueur)
+        public static void AjouterJoueur(string joueur)
         {
 
             _facade.AjouterJoueur(joueur);
             string chemin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Joueur.txt");
-            joueur.SauvegarderDansFichier(chemin);
+            //joueur.SauvegarderDansFichier(chemin);
 
         }
         public static void ChargerJoueurs()

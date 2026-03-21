@@ -105,6 +105,9 @@
     <EmbeddedResource Include="VueJoueur.resx">
       <DependentUpon>VueJoueur.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VuePlateau.resx">
+      <DependentUpon>VuePlateau.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VuePrincipale.resx">
       <DependentUpon>VuePrincipale.cs</DependentUpon>
     </EmbeddedResource>

@@ -37,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.vueJoueur1 = new Tp1Echec.VueJoueur();
             this.vuePlateau1 = new Tp1Echec.VuePlateau();
+            this.btnQuitter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBienvenue
@@ -51,7 +52,7 @@
             // btnDemarrerPartie
             // 
             this.btnDemarrerPartie.Location = new System.Drawing.Point(52, 185);
-            this.btnDemarrerPartie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDemarrerPartie.Margin = new System.Windows.Forms.Padding(2);
             this.btnDemarrerPartie.Name = "btnDemarrerPartie";
             this.btnDemarrerPartie.Size = new System.Drawing.Size(177, 38);
             this.btnDemarrerPartie.TabIndex = 3;
@@ -63,7 +64,7 @@
             // 
             this.cbJoueurNoir.FormattingEnabled = true;
             this.cbJoueurNoir.Location = new System.Drawing.Point(52, 163);
-            this.cbJoueurNoir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbJoueurNoir.Margin = new System.Windows.Forms.Padding(2);
             this.cbJoueurNoir.Name = "cbJoueurNoir";
             this.cbJoueurNoir.Size = new System.Drawing.Size(179, 21);
             this.cbJoueurNoir.TabIndex = 4;
@@ -82,7 +83,7 @@
             // 
             this.cbJoueurBlanc.FormattingEnabled = true;
             this.cbJoueurBlanc.Location = new System.Drawing.Point(52, 112);
-            this.cbJoueurBlanc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbJoueurBlanc.Margin = new System.Windows.Forms.Padding(2);
             this.cbJoueurBlanc.Name = "cbJoueurBlanc";
             this.cbJoueurBlanc.Size = new System.Drawing.Size(179, 21);
             this.cbJoueurBlanc.TabIndex = 6;
@@ -107,16 +108,28 @@
             // vuePlateau1
             // 
             this.vuePlateau1.Location = new System.Drawing.Point(215, 10);
-            this.vuePlateau1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.vuePlateau1.Margin = new System.Windows.Forms.Padding(1);
             this.vuePlateau1.Name = "vuePlateau1";
-            this.vuePlateau1.Size = new System.Drawing.Size(638, 553);
+            this.vuePlateau1.Size = new System.Drawing.Size(795, 553);
             this.vuePlateau1.TabIndex = 0;
+            // 
+            // btnQuitter
+            // 
+            this.btnQuitter.Location = new System.Drawing.Point(54, 227);
+            this.btnQuitter.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuitter.Name = "btnQuitter";
+            this.btnQuitter.Size = new System.Drawing.Size(177, 38);
+            this.btnQuitter.TabIndex = 8;
+            this.btnQuitter.Text = "Fermer le programe";
+            this.btnQuitter.UseVisualStyleBackColor = true;
+            this.btnQuitter.Click += new System.EventHandler(this.QuitterProgramme);
             // 
             // VuePrincipale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 592);
+            this.ClientSize = new System.Drawing.Size(1020, 592);
+            this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbJoueurBlanc);
             this.Controls.Add(this.label1);
@@ -125,7 +138,7 @@
             this.Controls.Add(this.vueJoueur1);
             this.Controls.Add(this.txtBienvenue);
             this.Controls.Add(this.vuePlateau1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VuePrincipale";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -149,6 +162,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbJoueurBlanc;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnQuitter;
     }
 }
 

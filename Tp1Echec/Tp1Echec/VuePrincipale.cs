@@ -22,8 +22,9 @@ namespace Tp1Echec
             ChargerComboBoxJoueurs();
 
             _plateau = vuePlateau1;
+            _plateau.OnScoreChanged += vueJoueur1.ChargerListe;
 
-            //DemarrerNouvellePartie();
+            vueJoueur1.OnJoueurAjoute += ChargerComboBoxJoueurs;
 
         }
 
@@ -87,9 +88,16 @@ namespace Tp1Echec
             }
         }
 
-        public void QuitterProgramme()
+        public void QuitterProgramme(object sender, EventArgs e)
         {
+            // Vérifier si une partie est en cours
+            if (_plateau.partieEnCours)
+            {
+                MessageBox.Show("Impossible de quitter : une partie est en cours !");
+                return;
+            }
 
+            // Sinon, quitter normalement
             JeuEchec.QuitterProgramme();
 
         }

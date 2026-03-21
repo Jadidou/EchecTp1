@@ -120,9 +120,22 @@ namespace Tp1Echec
             if (_partie != null)
             {
                 _partie.AbandonnerPartie();
+                SauvegarderJoueurs();
                 _partie = null; 
             }
 
+        }
+        public void SauvegarderJoueurs()
+        {
+            string chemin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Joueur.txt");
+
+            using (StreamWriter sw = new StreamWriter(chemin, false)) // overwrite
+            {
+                foreach (Joueur j in _listeJoueur)
+                {
+                    sw.WriteLine($"{j.nomJoueur},{j.pointage}");
+                }
+            }
         }
 
         // Quitter le programme
@@ -156,11 +169,17 @@ namespace Tp1Echec
         }
 
         // Ajouter un joueur
-        public void AjouterJoueur(Joueur joueur)
+        public void AjouterJoueur(string nom)
         {
+            // Validation doublon
+            if (_listeJoueur.Any(j => j.nomJoueur.Equals(nom, StringComparison.OrdinalIgnoreCase)))
+                throw new Exception("Ce joueur existe déjà.");
 
-            _listeJoueur.Add(joueur);
+            Joueur nouveau = new Joueur(nom, 0);
 
+            _listeJoueur.Add(nouveau);
+
+            SauvegarderJoueurs();
         }
 
         public void ChargerJoueursDepuisFichier(string chemin)

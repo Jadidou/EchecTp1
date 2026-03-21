@@ -13,7 +13,7 @@ namespace Tp1Echec
     public partial class VuePlateau : UserControl
     {
         PictureBox caseSelectionnee = null;
-        private bool partieEnCours = false;
+        public bool partieEnCours { get; private set; } = false;
 
         public VuePlateau()
         {
@@ -74,7 +74,7 @@ namespace Tp1Echec
                 return;
             }
 
-            // 🔹 2e clic → destination
+            //2e clic → destination
             string src = caseSelectionnee.Name;
             string dst = pb.Name;
 
@@ -224,19 +224,50 @@ namespace Tp1Echec
             //InitialiserPieces();
         }
 
-        public void AbandonnerPartie()
+        public event Action OnScoreChanged;
+
+        public void AbandonnerPartie(object sender, EventArgs e)
         {
 
             JeuEchec.AbandonnerPartie();
             MessageBox.Show("La partie a été abandonnée.");
+            OnScoreChanged?.Invoke();
+            partieEnCours = false;
 
         }
 
-        public void DemanderNulle()
+        public void DemanderNulle(object sender, EventArgs e)
         {
 
+            DialogResult blanc = MessageBox.Show(
+                "Joueur blanc accepte la nulle ?",
+                "Demande de nulle",
+                MessageBoxButtons.YesNo
+            );
+
+            if (blanc == DialogResult.No)
+            {
+                MessageBox.Show("Nulle refusée par le joueur blanc.");
+                return;
+            }
+
+            DialogResult noir = MessageBox.Show(
+                "Joueur noir accepte la nulle ?",
+                "Demande de nulle",
+                MessageBoxButtons.YesNo
+            );
+
+            if (noir == DialogResult.No)
+            {
+                MessageBox.Show("Nulle refusée par le joueur noir.");
+                return;
+            }
+
+            // Les deux acceptent → on applique
             JeuEchec.DemanderUneNulle();
-            MessageBox.Show("Demande de nulle envoyée.");
+
+            MessageBox.Show("La partie est déclarée nulle !");
+            partieEnCours = false;
 
         }
 

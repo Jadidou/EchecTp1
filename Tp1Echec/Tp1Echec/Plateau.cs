@@ -153,6 +153,10 @@ namespace Tp1Echec
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
             int x2 = coup.posFin.Item1, y2 = coup.posFin.Item2;
 
+            // Empêche un coup où la position de départ est la même que la position d'arrivée (double clic inutile)
+            if (x1 == x2 && y1 == y2)
+                return false;
+
             // 1. Positions dans les bornes du plateau
             if (!(PositionDansPlateau(x1, y1) && PositionDansPlateau(x2, y2)))
                 return false;
@@ -177,8 +181,8 @@ namespace Tp1Echec
 
             // 4.5 Roque : si le Roi capture la Tour alliée, déléguer entièrement à ValiderRoque
             if (piece.PeutInitierRoque() && !piece.PieceABouge()
-                && destination != null && destination.PeutSuivreRoque() && !destination.PieceABouge())
-                return ValiderRoque(coup);
+                && destination != null && destination != piece && destination.PeutSuivreRoque() && !destination.PieceABouge())
+            return ValiderRoque(coup);
 
             // 5. Validation géométrique déléguée à la pièce
             if (!piece.ValiderCoup(coup))
@@ -373,6 +377,7 @@ namespace Tp1Echec
                 int rangeePromotion = piece.PieceEstBlanche ? 7 : 0;
                 if (y2 == rangeePromotion)
                     _grillage[x2, y2] = new Dame(piece.PieceEstBlanche, false);
+
             }
         }
 
