@@ -20,6 +20,7 @@ namespace Tp1Echec
             InitializeComponent();
             MakeSquaresTransparent();
             AttachEvents();
+            DesactiverBoutonsPlateau();
         }
 
         private void MakeSquaresTransparent()
@@ -465,6 +466,17 @@ namespace Tp1Echec
                     }
                 }
             }
+        }
+
+        public void ActiverBoutonsPlateau()
+        {
+            btnAbandonner.Enabled = true;
+            btnDemanderNull.Enabled = true;
+        }
+        public void DesactiverBoutonsPlateau()
+        {
+            btnAbandonner.Enabled = false;
+            btnDemanderNull.Enabled = false;
         }
 
         public void MovePieceOnView(string from, string to)

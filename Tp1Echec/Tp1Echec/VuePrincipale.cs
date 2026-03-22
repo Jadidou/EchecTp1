@@ -24,6 +24,8 @@ namespace Tp1Echec
             _plateau = vuePlateau1;
             _plateau.OnScoreChanged += vueJoueur1.ChargerListe;
             _plateau.OnScoreChanged += ChargerComboBoxJoueurs;
+            _plateau.OnScoreChanged += DesactiverBoutonsPartie;
+            _plateau.OnScoreChanged += _plateau.DesactiverBoutonsPlateau;
 
             vueJoueur1.OnJoueurAjoute += ChargerComboBoxJoueurs;
 
@@ -58,6 +60,8 @@ namespace Tp1Echec
                 JeuEchec.DemarrerPartie(joueurBlanc, joueurNoir);
                 _plateau.DemarrerPartie();
                 JeuEchec.AfficherPlateau();
+                btnDemarrerPartie.Enabled = false;
+                _plateau.ActiverBoutonsPlateau();
                 MessageBox.Show("La partie a commencé !");
             }
             catch (Exception ex)
@@ -65,6 +69,11 @@ namespace Tp1Echec
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        public void DesactiverBoutonsPartie()
+        {
+                btnDemarrerPartie.Enabled = true;
         }
 
         public void ChargerComboBoxJoueurs()
