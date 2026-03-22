@@ -75,6 +75,14 @@ namespace Tp1Echec
                 return;
             }
 
+            // 2e clic sur la même case → désélectionner
+            if (pb == caseSelectionnee)
+            {
+                caseSelectionnee.BorderStyle = BorderStyle.None;
+                caseSelectionnee = null;
+                return;
+            }
+
             //2e clic → destination
             string src = caseSelectionnee.Name;
             string dst = pb.Name;
