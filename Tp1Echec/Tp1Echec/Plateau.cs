@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
+
+    // @class Plateau
+    // @brief Représente le plateau de jeu d’échecs (8x8) et gère toute la logique du jeu :
+    //        validation des coups, exécution des coups, états de la partie, etc.
     public class Plateau
     {
 
@@ -29,12 +33,14 @@ namespace Tp1Echec
 
         // Constructeur
 
+        // @brief Constructeur par défaut
         public Plateau()
         {
             _grillage = new Piece[8, 8];
             _dernierPionDoubleAvance = null;
         }
 
+        // @brief Constructeur de copie (clone complet du plateau)
         public Plateau(Plateau plateau)
         {
             _grillage = new Piece[8, 8];
@@ -54,6 +60,7 @@ namespace Tp1Echec
 
         // Indexeur
 
+        // @brief Permet d’accéder directement à une case du plateau
         private Piece this[int x, int y]
         {
             get { return _grillage[x, y]; }
@@ -62,13 +69,14 @@ namespace Tp1Echec
 
         // Méthodes
 
-        
+
 
         // DONE
         // Initialise le plateau en position de départ standard des échecs.
         // Utilise des indices 0-based : col 0=a..7=h, row 0=rangée 1..7=rangée 8.
         // Les blancs occupent rows 0-1, les noirs rows 6-7.
         // Toutes les pièces reçoivent pieceNaPasBouge=true pour activer les coups spéciaux initiaux (roque, double avance).
+        // @brief Initialise le plateau avec la position de départ standard
         public void InitialiserPlateau()
         {
             // Vider toutes les cases
@@ -113,6 +121,7 @@ namespace Tp1Echec
         // Vérifie si des coordonnées 0-based sont dans les limites du plateau 8x8.
         // Doit être appelée avant tout accès à _grillage pour éviter les exceptions d'index hors bornes.
         // Simple vérification d'intervalle : 0 <= x < 8 et 0 <= y < 8.
+        // @brief Vérifie si une position est dans les limites du plateau
         public bool PositionDansPlateau(int x, int y)
         {
             return x >= 0 && x < 8 && y >= 0 && y < 8;
@@ -123,6 +132,7 @@ namespace Tp1Echec
         // Chaque case est représentée par Serilization() de la pièce ou "Vide", séparées par "|".
         // Une nouvelle ligne sépare chaque rangée (row 0 à row 7).
         // 32 pièces attendues en position initiale, 32 cases "_".
+        // @brief Sérialise le plateau en texte (debug / affichage)
         public string serilizationPlateau()
         {
             StringBuilder sb = new StringBuilder();
@@ -142,6 +152,7 @@ namespace Tp1Echec
         // FONCTION AvoirPiecesEnnemi
         // Parse le plateau et retourne une List<Piece> de toutes les pieces ennemies
         // Recoit en paramètre une couleur (avec le booléen).
+        // @brief Retourne toutes les pièces ennemies d’une couleur donnée
         public List<Piece> AvoirPiecesEnnemi(bool estBlanc)
         {
             List<Piece> piecesEnnemies = new List<Piece>();
@@ -159,64 +170,7 @@ namespace Tp1Echec
         // Retourne false dès qu'une règle est violée (validation en court-circuit).
         // Délègue la géométrie à piece.ValiderCoup, le contexte du pion à ValiderCoupPion,
         // le roque à ValiderRoque, et vérifie via SimulerCoup qu'on ne se met pas en échec.
-        /*public bool ValiderCoup(Coup coup)
-        {
-            int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
-            int x2 = coup.posFin.Item1, y2 = coup.posFin.Item2;
-
-            // Empêche un coup où la position de départ est la même que la position d'arrivée (double clic inutile)
-            if (x1 == x2 && y1 == y2)
-                return false;
-
-            // 1. Positions dans les bornes du plateau
-            if (!(PositionDansPlateau(x1, y1) && PositionDansPlateau(x2, y2)))
-                return false;
-
-            // 2. Une pièce doit être présente à la position de départ
-            Piece piece = _grillage[x1, y1];
-            if (piece == null)
-                return false;
-
-            // 3. La pièce doit appartenir au joueur dont c'est le tour
-            if (piece.PieceEstBlanche != coup.estTourBlanc)
-                return false;
-
-            // 4. La destination ne doit pas être occupée par une pièce amie (sauf roque : la Tour est alliée)
-            Piece destination = _grillage[x2, y2];
-            if (destination != null && destination.PieceEstBlanche == coup.estTourBlanc
-                && !(piece.PeutInitierRoque() && !piece.PieceABouge() && destination.PeutSuivreRoque() && !destination.PieceABouge()))
-                return false;
-
-            int dx = x2 - x1;
-            int dy = y2 - y1;
-
-            // 4.5 Roque : si le Roi capture la Tour alliée, déléguer entièrement à ValiderRoque
-            if (piece.PeutInitierRoque() && !piece.PieceABouge()
-                && destination != null && destination != piece && destination.PeutSuivreRoque() && !destination.PieceABouge())
-            return ValiderRoque(coup);
-
-            // 5. Validation géométrique déléguée à la pièce
-            if (!piece.ValiderCoup(coup))
-                return false;
-
-            // 6. Règles contextuelles du pion
-            if (!ValiderCoupsPion(coup, piece, destination, dx, dy))
-                return false;
-
-            // 7. Chemin libre pour les pièces qui ne peuvent pas sauter par-dessus d'autres pièces
-            if (piece.CauseCollision())
-            {
-                if (!CheminLibre(coup))
-                    return false;
-            }
-
-            // 8. Rejeter tout coup qui laisserait son propre roi en échec
-            if (SimulerCoup(coup).VerificationEchec(coup.estTourBlanc))
-                return false;
-
-            return true;
-        }*/
-
+        // @brief Valide un coup complet avec toutes les règles du jeu
         public CodeErreurCoup ValiderCoup(Coup coup)
         {
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
@@ -350,41 +304,7 @@ namespace Tp1Echec
         // 1. Valide si le roque peut être fait. (SINON early return)
         // 2. Si correct, faire la validation que le chemin pour le roi est Safe (copier plateau, null où le roi est, nouveau roi à la première case intermédiaire, vérifierEchec(), si good, on recommence, jusqu'à atteindre la case destination) early return sinon.
         // 3. Si tout est parfait, on retourne true.
-        /*private bool ValiderRoque(Coup coup)
-        {
-            int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
-            int x2 = coup.posFin.Item1,  y2 = coup.posFin.Item2;
-
-            // Le roque est horizontal (même rangée)
-            if (y1 != y2) return false;
-
-            Piece roi = _grillage[x1, y1];
-            Piece tour = _grillage[x2, y2];
-
-            // 1. Vérifications polymorphiques : Roi et Tour n'ont pas bougé
-            if (roi == null || !roi.PeutInitierRoque() || roi.PieceABouge()) return false;
-            if (tour == null || !tour.PeutSuivreRoque() || tour.PieceABouge()) return false;
-
-            // Chemin libre entre le roi et la tour (cases intermédiaires)
-            if (!CheminLibre(coup)) return false;
-
-            // 2. Le roi ne doit pas être en échec sur sa case actuelle, de transit, ni d'arrivée
-            // On simule le roi à chaque case traversée (case 0 = départ, 1 = transit, 2 = arrivée finale)
-            int direction = Math.Sign(x2 - x1);
-            for (int pas = 0; pas <= 2; pas++)
-            {
-                int caseRoi = x1 + pas * direction;
-                Plateau simulation = new Plateau(this);
-                simulation._grillage[x1, y1] = null;
-                simulation._grillage[caseRoi, y1] = roi;
-                if (simulation.VerificationEchec(coup.estTourBlanc))
-                    return false;
-            }
-
-            // 3. Tout est valide
-            return true;
-        }*/
-
+        
         private CodeErreurCoup ValiderRoque(Coup coup)
         {
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
@@ -433,6 +353,8 @@ namespace Tp1Echec
         // Cas spéciaux gérés dans l'ordre : prise en passant, roque (déplacement Tour), déplacement principal,
         // mémorisation du double avance, promotion automatique en Dame à la dernière rangée.
         // SetPieceABouge(true) désactive les coups spéciaux futurs (roque, double avance du pion).
+        // @brief Exécute un coup sur le plateau
+        //        Gère tous les cas spéciaux : en passant, roque, promotion
         public void JouerCoup(Coup coup)
         {
             int x1 = coup.posDebut.Item1, y1 = coup.posDebut.Item2;
@@ -518,6 +440,7 @@ namespace Tp1Echec
             _promotionEnAttente = false;
         }
 
+        // @brief Vérifie si un joueur est en échec
         public bool VerificationEchec(bool estBlanc)
         {
             List<Tuple<int, int>> listePos = TrouverPiecesVulnerables(estBlanc);
@@ -586,6 +509,7 @@ namespace Tp1Echec
             return copie;
         }
 
+        // Vérifie si le joueur de la couleur donnée a au moins un coup légal disponible.
         private bool JoueurAPossibleCoup(bool estBlanc)
         {
             for (int x1 = 0; x1 < 8; x1++)

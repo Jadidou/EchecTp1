@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Tp1Echec
 {
+    // @class Joueur
+    // @brief Représente un joueur d’échecs avec un nom et un pointage.
     public class Joueur
     {
 
@@ -17,6 +19,9 @@ namespace Tp1Echec
 
         //constructeur
 
+        // @brief Constructeur principal
+        // @param nomJoueur Nom du joueur
+        // @param pointage Pointage initial du joueur
         public Joueur(string nomJoueur, int pointage) 
         {
             _nomJoueur = nomJoueur;
@@ -26,6 +31,7 @@ namespace Tp1Echec
 
         //proprieter
 
+        // @brief Accesseur du nom du joueur
         public string nomJoueur
         {
             get { return _nomJoueur; }
@@ -33,6 +39,7 @@ namespace Tp1Echec
 
         }
 
+        // @brief Accesseur du pointage du joueur
         public int pointage
         { 
         
@@ -42,7 +49,8 @@ namespace Tp1Echec
 
         //methode
 
-        // Méthode pour ajuster le pointage du joueur
+        // @brief Ajuste le pointage du joueur
+        // @param points Nombre de points à ajouter (ou retirer)
         public void AjusterPoint(int points)
         {
 
@@ -55,14 +63,16 @@ namespace Tp1Echec
 
         }
 
-        //À REVÉRIFIER CETTE PARTIE!!!
-
-        //Méthodes pour intéragir avec fichier txt
+        // @brief Sauvegarde les informations du joueur dans un fichier texte
+        // @param chemin Chemin du fichier
         public void SauvegarderDansFichier(string chemin)
         {
             File.AppendAllText(chemin, $"{_nomJoueur},{_pointage}\n");
         }
 
+        // @brief Charge un joueur à partir d’une ligne de fichier texte
+        // @param ligne Ligne contenant les données du joueur
+        // @return Nouvelle instance de Joueur
         public static Joueur ChargerDepuisFichier(string ligne)
         {
             var parties = ligne.Split(',');
@@ -71,12 +81,15 @@ namespace Tp1Echec
             return new Joueur(nom, pointage);
         }
 
+        // @brief Retourne une représentation texte du joueur
+        // @return Chaîne contenant le nom et le pointage
         public override string ToString()
         {
             return $"Joueur: {_nomJoueur}, Pointage: {_pointage}";
         }
 
         //destructeur
+        // @brief Destructeur de la classe Joueur
         ~Joueur() { }
 
     }

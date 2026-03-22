@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
+    // @class FacadeEchec
+    // @brief Classe façade qui protege la logique du jeu.
+    //        Gère la liste des joueurs et la partie en cours.
     public class FacadeEchec
     {
 
@@ -19,6 +22,8 @@ namespace Tp1Echec
 
         //constructeur
 
+        // @brief Constructeur principal
+        //        Initialise la liste de joueurs et aucun partie en cours
         public FacadeEchec() 
         {
 
@@ -30,6 +35,7 @@ namespace Tp1Echec
 
         //proprieter
 
+        // @brief Accesseur pour la partie en cours
         public Partie partie
         {
 
@@ -39,6 +45,8 @@ namespace Tp1Echec
         }
 
         //indexeur
+
+        // @brief Accède à un joueur par son index dans la liste
         public Joueur this[int index]
         {
             get{return _listeJoueur[index];}
@@ -47,7 +55,8 @@ namespace Tp1Echec
 
         //methode
 
-        // Retourne la liste des joueurs sous forme de string
+        // @brief Retourne la liste des joueurs sous forme de chaîne
+        // @return Liste des joueurs (nom et pointage)
         public string ConsulterListeJoueur()
         {
             StringBuilder liste = new StringBuilder();
@@ -60,7 +69,10 @@ namespace Tp1Echec
             return liste.ToString();
         }
 
-        // Joue un coup
+        // @brief Joue un coup sur la partie en cours
+        // @param x Position de départ
+        // @param y Position d’arrivée
+        // @return Code de retour du coup (-1 si aucune partie)
         public int JouerCoup(string x, string y)
         {
 
@@ -77,6 +89,9 @@ namespace Tp1Echec
         }
 
         // Applique la promotion choisie par le joueur (après un retour de code 2 de JouerCoup).
+        // @brief Applique la promotion choisie par le joueur
+        // @param codePiece Type de pièce choisie (Q, R, N, B)
+        // @return Code de retour
         public int PromouvoirPion(string codePiece)
         {
             if (_partie == null) return -1;
@@ -89,7 +104,9 @@ namespace Tp1Echec
             return codeRetour;
         }
 
-        // Démarre une partie
+        // @brief Démarre une partie avec deux joueurs existants
+        // @param joueurBlanc Nom du joueur blanc
+        // @param joueurNoir Nom du joueur noir
         public void DemarrerPartie(string joueurBlanc, string joueurNoir)
         {
             if (_listeJoueur.Count < 2)
@@ -131,7 +148,7 @@ namespace Tp1Echec
             _partie.DemarrerPartie();
         }
 
-        // Abandonner la partie
+        // @brief Abandonne la partie en cours
         public void AbandonnerPartie()
         {
 
@@ -143,6 +160,8 @@ namespace Tp1Echec
             }
 
         }
+
+        // @brief Sauvegarde tous les joueurs dans un fichier texte
         public void SauvegarderJoueurs()
         {
             string chemin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Joueur.txt");
@@ -156,7 +175,7 @@ namespace Tp1Echec
             }
         }
 
-        // Quitter le programme
+        // @brief Quitte le programme
         public void QuitterProgramme()
         {
 
@@ -164,7 +183,8 @@ namespace Tp1Echec
 
         }
 
-        // Afficher le plateau
+        // @brief Retourne le plateau actuel sous forme de chaîne
+        // @return Plateau ou message si aucune partie en cours
         public string AfficherPlateau()
         {
 
@@ -175,7 +195,7 @@ namespace Tp1Echec
 
         }
 
-        // Demander une nulle
+        // @brief Demande une nulle pour la partie en cours
         public void DemanderUneNulle()
         {
 
@@ -186,12 +206,15 @@ namespace Tp1Echec
 
         }
 
+        // @brief Vérifie l’état de la partie
+        // @return Code représentant l’état de la partie
         public int VerifierEtatPartie()
         {
             return (int)_partie.VerifierEtatPartie();
         }
 
-        // Ajouter un joueur
+        // @brief Ajoute un joueur à la liste
+        // @param nom Nom du joueur à ajouter
         public void AjouterJoueur(string nom)
         {
             // Validation doublon
@@ -205,6 +228,8 @@ namespace Tp1Echec
             SauvegarderJoueurs();
         }
 
+        // @brief Charge les joueurs depuis un fichier texte
+        // @param chemin Chemin du fichier contenant les joueurs
         public void ChargerJoueursDepuisFichier(string chemin)
         {
             _listeJoueur.Clear();
@@ -232,6 +257,7 @@ namespace Tp1Echec
         }
 
         //destructeur
+        // @brief Destructeur de la classe FacadeEchec
         ~FacadeEchec() { }
 
     }

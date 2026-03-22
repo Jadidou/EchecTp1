@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
+    // @class Partie
+    // @brief Représente une partie d’échecs complète.
+    //        Gère les joueurs, les coups, les états du plateau et les règles de fin de partie.
     public class Partie
     {
 
@@ -22,7 +25,9 @@ namespace Tp1Echec
         private Plateau _plateauEnAttentePromotion = null;
 
         //constructeur
-
+        // @brief Constructeur principal
+        // @param joueurBlanc Joueur blanc
+        // @param joueurNoir Joueur noir
         public Partie(Joueur joueurBlanc, Joueur joueurNoir) 
         {
 
@@ -39,12 +44,14 @@ namespace Tp1Echec
 
         //proprieter
 
+        // @brief Accesseur du joueur blanc
         public Joueur joueurBlanc
         {
             get { return _joueurBlanc; }
             set { _joueurBlanc = value; }
         }
 
+        // @brief Accesseur du joueur noir
         public Joueur joueurNoir
         {
             get { return _joueurNoir; }
@@ -53,6 +60,8 @@ namespace Tp1Echec
 
         //indexeur
 
+        // @brief Accès à un plateau dans l’historique
+        // @param index Position dans la pile
         public Plateau this[int index]
         {
             get
@@ -61,6 +70,8 @@ namespace Tp1Echec
             }
         }
 
+        // @brief Accès à un état de plateau (string)
+        // @param index Index sous forme de string
         public string this[string index]
         {
             get
@@ -77,7 +88,8 @@ namespace Tp1Echec
 
         //methode
 
-        // Vérifie répétition de position (nulle) (3 répétitions)
+        // @brief Vérifie une nulle par répétition de position (3 fois)
+        // @return true si répétition détectée, sinon false
         public bool VerificationNulleParBoucle()
         {
 
@@ -94,6 +106,8 @@ namespace Tp1Echec
 
         }
 
+        // @brief Vérifie l’état actuel de la partie (mat, pat, nulle, etc.)
+        // @return Code représentant l’état de la partie
         public CodeEtatPartie VerifierEtatPartie()
         {
             if (_pilePlateau.Count == 0)
@@ -113,7 +127,8 @@ namespace Tp1Echec
             return plateauActuel.VerifierEtatPartie(_tourBlanc);
         }
 
-        // Ajuste le pointage (ex: abandon, mat, nulle)
+        // @brief Ajuste le pointage des joueurs
+        // @param blancGagne true si les blancs gagnent, sinon noirs
         public void AjusterPointage(bool blancGagne)
         {
 
@@ -130,6 +145,10 @@ namespace Tp1Echec
 
         }
 
+        // @brief Joue un coup à partir de coordonnées texte
+        // @param x Position de départ
+        // @param y Position d’arrivée
+        // @return Code de succès ou erreur
         public int JouerCoup(string x, string y)
         {
 
@@ -177,6 +196,9 @@ namespace Tp1Echec
 
         // Applique le choix de promotion du joueur et finalise le coup.
         // codePiece : "Q" = Dame, "R" = Tour, "N" = Cavalier, "B" = Fou.
+        // @brief Applique la promotion d’un pion
+        // @param codePiece Type de pièce choisie (Q, R, N, B)
+        // @return Code de succès
         public int PromouvoirPion(string codePiece)
         {
             if (_plateauEnAttentePromotion == null) return -1;
@@ -190,6 +212,9 @@ namespace Tp1Echec
         }
 
         // Pousse le plateau sur la pile, enregistre l'état, change le tour et vérifie la fin de partie.
+        // @brief Finalise un coup (sauvegarde, changement de tour, vérifications)
+        // @param p Plateau après coup
+        // @return Code de succès
         private int FinaliserCoup(Plateau p)
         {
             // Sauvegarder
@@ -221,7 +246,7 @@ namespace Tp1Echec
             return 1;
         }
 
-        //démarre la partie
+        // @brief Initialise et démarre une nouvelle partie
         public void DemarrerPartie()
         {
 
@@ -238,7 +263,7 @@ namespace Tp1Echec
 
         }
 
-        //abandonne la partie
+        // @brief Abandonne la partie
         public void AbandonnerPartie()
         {
 
@@ -252,7 +277,7 @@ namespace Tp1Echec
 
         }
 
-        //demande une nulle
+        // @brief Demande une nulle
         public void DemanderUneNulle()
         {
 
@@ -266,7 +291,8 @@ namespace Tp1Echec
 
         }
 
-        //affiche le plateau
+        // @brief Retourne une représentation texte du plateau actuel
+        // @return Plateau sérialisé
         public string AfficherPlateau()
         {
 
@@ -277,7 +303,7 @@ namespace Tp1Echec
 
         }
 
-        //la methode undo si jamais!
+        // @brief Annule le dernier coup joué
         public void AnnulerDernierCoup()
         {
             if (_pilePlateau.Count > 1)
@@ -291,6 +317,7 @@ namespace Tp1Echec
 
 
         //destructeur
+        // @brief Destructeur de la classe Partie
         ~Partie() { }
 
     }

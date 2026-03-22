@@ -10,25 +10,39 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
+    // @class VuePrincipale
+    // @brief Représente la fenêtre principale de l'application.
+    //        Gère le démarrage des parties, la sélection des joueurs
+    //        et la communication entre les différentes vues.
     public partial class VuePrincipale : Form
     {
-
+        // Référence vers la vue du plateau d'échecs
         public VuePlateau _plateau;
 
+        // @brief Constructeur de la vue principale
+        // Initialise les composants et les liaisons entre les vues
         public VuePrincipale()
         {
             InitializeComponent();
 
+            // Charge les joueurs dans les ComboBox au démarrage
             ChargerComboBoxJoueurs();
 
+            // Associe la vue plateau existante (UserControl)
             _plateau = vuePlateau1;
+
+            // Met à jour la liste des joueurs et les ComboBox lorsqu’un score change
             _plateau.OnScoreChanged += vueJoueur1.ChargerListe;
             _plateau.OnScoreChanged += ChargerComboBoxJoueurs;
 
+            // Met à jour les ComboBox lorsqu’un joueur est ajouté
             vueJoueur1.OnJoueurAjoute += ChargerComboBoxJoueurs;
 
         }
 
+        // @brief Démarre une nouvelle partie entre deux joueurs sélectionnés
+        // @param sender Objet déclencheur (bouton)
+        // @param e Arguments de l’événement
         public void DemarrerPartie(object sender, EventArgs e)
         {
 
@@ -69,15 +83,19 @@ namespace Tp1Echec
 
         }
 
+        // @brief Désactive les boutons liés à la partie
         public void DesactiverBoutonsPartie()
         {
                 btnDemarrerPartie.Enabled = true;
         }
+
+        // @brief Active les boutons liés à la partie
         public void ActiverBoutonsPartie()
         {
                 btnDemarrerPartie.Enabled = true;
         }
 
+        // @brief Charge les joueurs dans les ComboBox (blanc et noir)
         public void ChargerComboBoxJoueurs()
         {
             cbJoueurBlanc.Items.Clear();
@@ -104,6 +122,9 @@ namespace Tp1Echec
             }
         }
 
+        // @brief Quitte le programme si aucune partie n’est en cours
+        // @param sender Objet déclencheur
+        // @param e Arguments de l’événement
         public void QuitterProgramme(object sender, EventArgs e)
         {
             // Vérifier si une partie est en cours

@@ -10,12 +10,24 @@ using System.Windows.Forms;
 
 namespace Tp1Echec
 {
+    // @class VuePlateau
+    // @brief Représente la vue graphique du plateau d'échecs (UserControl).
+    //        Gère l'affichage des pièces, les interactions utilisateur (clics)
     public partial class VuePlateau : UserControl
     {
-        PictureBox caseSelectionnee = null;
-        VuePrincipale _principale;
-        public bool partieEnCours { get; private set; } = false;
+        //attributs
 
+        PictureBox caseSelectionnee = null; //< Case actuellement sélectionnée par l’utilisateur.
+        VuePrincipale _principale; //< Référence vers la vue principale (menu, score, boutons).
+
+
+        //proprietés
+        public bool partieEnCours { get; private set; } = false; //< Indique si une partie est en cours.
+
+        //constructeur
+
+        // @brief Initialise la vue du plateau.
+        // @param principale Référence vers la vue principale.
         public VuePlateau(VuePrincipale principale)
         {
             _principale = principale;
@@ -25,6 +37,9 @@ namespace Tp1Echec
             DesactiverBoutonsPlateau();
         }
 
+        //methodes
+
+        // @brief Rend les cases transparentes pour afficher le plateau en arrière-plan.
         private void MakeSquaresTransparent()
         {
             if (this.PlateauEchec == null) return;
@@ -41,7 +56,8 @@ namespace Tp1Echec
                 // Calculer la position relative au PlateauEchec avant de changer le Parent
                 var relativeLocation = new Point(pb.Location.X - PlateauEchec.Location.X,
                                                  pb.Location.Y - PlateauEchec.Location.Y);
-
+                
+                // On rattache la case au plateau pour permettre la transparence
                 pb.Parent = PlateauEchec;
                 pb.Location = relativeLocation;
                 pb.BackColor = Color.Transparent;
@@ -49,7 +65,7 @@ namespace Tp1Echec
             }
         }
 
-        // Attacher UN SEUL event : Click
+        // @brief Attache l'événement Click à toutes les cases du plateau.
         private void AttachEvents()
         {
             foreach (var pb in PlateauEchec.Controls.OfType<PictureBox>())
@@ -59,7 +75,8 @@ namespace Tp1Echec
             }
         }
 
-        // LOGIQUE CLICK CLICK
+        // @brief Gère les clics utilisateur sur les cases du plateau.
+        //        Permet la sélection d'une pièce et son déplacement.
         private void Case_Click(object sender, EventArgs e)
         {
             if (!partieEnCours) return;
@@ -211,12 +228,12 @@ namespace Tp1Echec
                                     break;
                             }
                         }
-
+                        // Rafraîchir le plateau après promotion
                         RefreshFromState(JeuEchec.AfficherPlateau());
                         moved = true;
                     }
                 }
-
+                //coup joué avec succès, rafraîchir le plateau
                 if (result == 1)
                 {
                     RefreshFromState(JeuEchec.AfficherPlateau());
@@ -235,6 +252,8 @@ namespace Tp1Echec
 
         // Affiche un popup de sélection de pièce pour la promotion et retourne le code choisi.
         // Codes : "Q" = Dame, "R" = Tour, "N" = Cavalier, "B" = Fou.
+        // @brief Affiche une popup pour choisir la pièce de promotion.
+        // @return Code de la pièce choisie (Q, R, N, B).
         private string ChoisirPiecePromotion()
         {
             string choix = "Q"; // défaut : Dame
@@ -272,6 +291,7 @@ namespace Tp1Echec
             return choix;
         }
 
+        // @brief Initialise les pièces sur le plateau au début de la partie.
         private void InitialiserPieces()
         {
             if (this.PlateauEchec == null) return;
@@ -374,6 +394,7 @@ namespace Tp1Echec
 
         }
 
+        // @brief Démarre une nouvelle partie.
         public void DemarrerPartie()
         {
             //Program.DemarrerPartie();
@@ -383,8 +404,9 @@ namespace Tp1Echec
         }
 
 
-        public event Action OnScoreChanged;
+        public event Action OnScoreChanged; //< Événement pour mise à jour du score
 
+        // @brief Permet d’abandonner la partie.
         public void AbandonnerPartie(object sender, EventArgs e)
         {
 
@@ -395,6 +417,7 @@ namespace Tp1Echec
 
         }
 
+        // @brief Permet de demander une partie nulle.
         public void DemanderNulle(object sender, EventArgs e)
         {
 
@@ -435,6 +458,7 @@ namespace Tp1Echec
         // Rafraîchit l'affichage complet du plateau à partir de la sérialisation retournée par AfficherPlateau().
         // Format : 8 lignes séparées par \n, chaque ligne = 8 codes séparés par virgule (ex: "WR,_,_,...").
         // Rangée 0 = rangée 1 (bas du plateau), colonne 0 = colonne A.
+        // @brief Rafraîchit l'affichage du plateau à partir de l'état du modèle.
         private void RefreshFromState(string plateauSerialise)
         {
             if (plateauSerialise == null) return;
@@ -486,17 +510,21 @@ namespace Tp1Echec
             }
         }
 
+        // @brief Active les boutons du plateau.
         public void ActiverBoutonsPlateau()
         {
             btnAbandonner.Enabled = true;
             btnDemanderNull.Enabled = true;
         }
+
+        // @brief Désactive les boutons du plateau.
         public void DesactiverBoutonsPlateau()
         {
             btnAbandonner.Enabled = false;
             btnDemanderNull.Enabled = false;
         }
 
+        // @brief Déplace une pièce visuellement (sans logique métier).
         public void MovePieceOnView(string from, string to)
         {
             var src = PlateauEchec.Controls.Find(from, true).FirstOrDefault() as PictureBox;
