@@ -67,8 +67,13 @@ namespace Tp1Echec
             if (_partie == null)
                 return -1;
 
-            return _partie.JouerCoup(x, y);
+            int codeRetour = _partie.JouerCoup(x, y);
 
+            // Persister les scores après chaque coup valide (ils changent en fin de partie)
+            if (codeRetour == 1)
+                SauvegarderJoueurs();
+
+            return codeRetour;
         }
 
         // Démarre une partie
@@ -168,9 +173,9 @@ namespace Tp1Echec
 
         }
 
-        public CodeEtatPartie VerifierEtatPartie()
+        public int VerifierEtatPartie()
         {
-            return _partie.VerifierEtatPartie();
+            return (int)_partie.VerifierEtatPartie();
         }
 
         // Ajouter un joueur

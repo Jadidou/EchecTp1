@@ -23,6 +23,7 @@ namespace Tp1Echec
 
             _plateau = vuePlateau1;
             _plateau.OnScoreChanged += vueJoueur1.ChargerListe;
+            _plateau.OnScoreChanged += ChargerComboBoxJoueurs;
 
             vueJoueur1.OnJoueurAjoute += ChargerComboBoxJoueurs;
 
@@ -70,6 +71,10 @@ namespace Tp1Echec
         {
             cbJoueurBlanc.Items.Clear();
             cbJoueurNoir.Items.Clear();
+            cbJoueurBlanc.SelectedIndex = -1;
+            cbJoueurNoir.SelectedIndex = -1;
+            cbJoueurBlanc.Text = String.Empty;
+            cbJoueurNoir.Text = String.Empty;
 
             JeuEchec.ChargerJoueurs();
 

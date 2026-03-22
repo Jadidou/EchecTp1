@@ -122,29 +122,38 @@ namespace Tp1Echec
                     return;
                 }
 
-                CodeEtatPartie etat = JeuEchec.VerifierEtatPartie();
+                const int ETAT_OK = 0;
+                const int ETAT_ECHEC = 1;
+                const int ETAT_ECHEC_MAT = 2;
+                const int ETAT_PAT = 3;
+                const int ETAT_NULLE = 4;
 
-                if (etat != CodeEtatPartie.OK)
+                int etat = JeuEchec.VerifierEtatPartie();
+
+                if (etat != ETAT_OK)
                 {
                     switch (etat)
                     {
-                        case CodeEtatPartie.Echec:
+                        case ETAT_ECHEC:
                             MessageBox.Show("Échec !");
                             break;
 
-                        case CodeEtatPartie.EchecEtMat:
+                        case ETAT_ECHEC_MAT:
                             MessageBox.Show("Échec et mat !");
                             partieEnCours = false;
+                            OnScoreChanged?.Invoke();
                             break;
 
-                        case CodeEtatPartie.Pat:
+                        case ETAT_PAT:
                             MessageBox.Show("Pat !");
                             partieEnCours = false;
+                            OnScoreChanged?.Invoke();
                             break;
 
-                        case CodeEtatPartie.Nulle:
+                        case ETAT_NULLE:
                             MessageBox.Show("Partie nulle (répétition) !");
                             partieEnCours = false;
+                            OnScoreChanged?.Invoke();
                             break;
                     }
                 }

@@ -58,7 +58,7 @@ namespace Tp1Echec
 
         }
 
-        public static CodeEtatPartie VerifierEtatPartie()
+        public static int VerifierEtatPartie()
         {
             return _facade.VerifierEtatPartie();
         }
