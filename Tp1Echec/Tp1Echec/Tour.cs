@@ -24,7 +24,7 @@ namespace Tp1Echec
 
         public override bool PeutInitierRoque()
         {
-            return true;
+            return false;
         }
 
         public override bool PeutSuivreRoque()

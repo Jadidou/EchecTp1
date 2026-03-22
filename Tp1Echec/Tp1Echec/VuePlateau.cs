@@ -13,10 +13,12 @@ namespace Tp1Echec
     public partial class VuePlateau : UserControl
     {
         PictureBox caseSelectionnee = null;
+        VuePrincipale _principale;
         public bool partieEnCours { get; private set; } = false;
 
-        public VuePlateau()
+        public VuePlateau(VuePrincipale principale)
         {
+            _principale = principale;
             InitializeComponent();
             MakeSquaresTransparent();
             AttachEvents();
@@ -150,18 +152,24 @@ namespace Tp1Echec
                         case ETAT_ECHEC_MAT:
                             MessageBox.Show("Échec et mat !");
                             partieEnCours = false;
+                            _principale.ActiverBoutonsPartie();
+                            DesactiverBoutonsPlateau();
                             OnScoreChanged?.Invoke();
                             break;
 
                         case ETAT_PAT:
                             MessageBox.Show("Pat !");
                             partieEnCours = false;
+                            _principale.ActiverBoutonsPartie();
+                            DesactiverBoutonsPlateau();
                             OnScoreChanged?.Invoke();
                             break;
 
                         case ETAT_NULLE:
                             MessageBox.Show("Partie nulle (répétition) !");
                             partieEnCours = false;
+                            _principale.ActiverBoutonsPartie();
+                            DesactiverBoutonsPlateau();
                             OnScoreChanged?.Invoke();
                             break;
                     }
@@ -416,6 +424,8 @@ namespace Tp1Echec
 
             // Les deux acceptent → on applique
             JeuEchec.DemanderUneNulle();
+            DesactiverBoutonsPlateau();
+            _principale.ActiverBoutonsPartie();
 
             MessageBox.Show("La partie est déclarée nulle !");
             partieEnCours = false;

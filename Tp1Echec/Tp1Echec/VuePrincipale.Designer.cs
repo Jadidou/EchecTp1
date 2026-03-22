@@ -36,7 +36,7 @@
             this.cbJoueurBlanc = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.vueJoueur1 = new Tp1Echec.VueJoueur();
-            this.vuePlateau1 = new Tp1Echec.VuePlateau();
+            this.vuePlateau1 = new Tp1Echec.VuePlateau(this);
             this.btnQuitter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
