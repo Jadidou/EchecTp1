@@ -242,7 +242,7 @@ namespace Tp1Echec
             // 4.5 Roque
             if (piece.PeutInitierRoque() && !piece.PieceABouge()
                 && destination != null && destination != piece && destination.PeutSuivreRoque() && !destination.PieceABouge())
-                return ValiderRoque(coup); // ⚠️ IMPORTANT : doit retourner CodeErreurCoup
+                return ValiderRoque(coup); // ️ IMPORTANT : doit retourner CodeErreurCoup
 
             // 5. Géométrie
             if (!piece.ValiderCoup(coup))
@@ -472,7 +472,7 @@ namespace Tp1Echec
             // Mémoriser le double avance du pion pour autoriser la prise en passant au coup suivant
             // La position mémorisée est la case que le pion a sautée (case intermédiaire)
             if (piece.PeutCharger() && Math.Abs(dy) == 2 && dx == 0)
-                _dernierPionDoubleAvance = (x1, y1 + Math.Sign(dy));
+                _dernierPionDoubleAvance = (x2, y2);
 
             // Promotion : si un pion atteint la dernière rangée, il devient automatiquement une Dame
             if (piece.PeutEtrePromu())

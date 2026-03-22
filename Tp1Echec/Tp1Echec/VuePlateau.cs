@@ -151,13 +151,7 @@ namespace Tp1Echec
 
                 if (result == 1)
                 {
-                    // déplacement visuel
-                    pb.Image = caseSelectionnee.Image;
-                    pb.Tag = caseSelectionnee.Tag;
-
-                    caseSelectionnee.Image = null;
-                    caseSelectionnee.Tag = null;
-
+                    RefreshFromState(JeuEchec.AfficherPlateau());
                     moved = true;
                 }
             }
@@ -281,13 +275,6 @@ namespace Tp1Echec
             InitialiserPieces();
         }
 
-        public void RefreshPlateau()
-        {
-            // Cette méthode peut être appelée par le contrôleur pour forcer une mise à jour visuelle du plateau
-            // en cas de changements externes.
-            //if (!partieEnCours) return;
-            //InitialiserPieces();
-        }
 
         public event Action OnScoreChanged;
 
@@ -334,6 +321,60 @@ namespace Tp1Echec
             MessageBox.Show("La partie est déclarée nulle !");
             partieEnCours = false;
 
+        }
+
+        // Rafraîchit l'affichage complet du plateau à partir de la sérialisation retournée par AfficherPlateau().
+        // Format : 8 lignes séparées par \n, chaque ligne = 8 codes séparés par virgule (ex: "WR,_,_,...").
+        // Rangée 0 = rangée 1 (bas du plateau), colonne 0 = colonne A.
+        private void RefreshFromState(string plateauSerialise)
+        {
+            if (plateauSerialise == null) return;
+
+            string[] rangees = plateauSerialise.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (rangees.Length < 8) return;
+
+            char[] colonnes = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+
+            for (int rangee = 0; rangee < 8; rangee++)
+            {
+                string[] pieces = rangees[rangee].Split(',');
+                if (pieces.Length < 8) continue;
+
+                for (int col = 0; col < 8; col++)
+                {
+                    string nomCase = "" + colonnes[col] + (char)('1' + rangee);
+                    string piece = pieces[col].Trim();
+
+                    var pb = PlateauEchec.Controls.Find(nomCase, true).FirstOrDefault() as PictureBox;
+                    if (pb == null) continue;
+
+                    if (piece == "_")
+                    {
+                        pb.Image = null;
+                        pb.Tag = null;
+                    }
+                    else
+                    {
+                        pb.Tag = piece;
+                        pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                        switch (piece)
+                        {
+                            case "WP": pb.Image = Properties.Resources.pionBlanc; break;
+                            case "WR": pb.Image = Properties.Resources.tourBlanc; break;
+                            case "WN": pb.Image = Properties.Resources.cavalierBlanc; break;
+                            case "WB": pb.Image = Properties.Resources.fouBlanc; break;
+                            case "WQ": pb.Image = Properties.Resources.reineBlanc; break;
+                            case "WK": pb.Image = Properties.Resources.roiBlanc; break;
+                            case "BP": pb.Image = Properties.Resources.pionNoir; break;
+                            case "BR": pb.Image = Properties.Resources.tourNoir; break;
+                            case "BN": pb.Image = Properties.Resources.cavalierNoir; break;
+                            case "BB": pb.Image = Properties.Resources.fouNoir; break;
+                            case "BQ": pb.Image = Properties.Resources.reineNoir; break;
+                            case "BK": pb.Image = Properties.Resources.roiNoir; break;
+                        }
+                    }
+                }
+            }
         }
 
         public void MovePieceOnView(string from, string to)
