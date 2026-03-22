@@ -18,6 +18,9 @@ namespace Tp1Echec
         private List<string> _pileEtatPlateau;
         private bool _tourBlanc;
 
+        // Plateau en attente lorsqu'une promotion est en cours (avant le choix du joueur).
+        private Plateau _plateauEnAttentePromotion = null;
+
         //constructeur
 
         public Partie(Joueur joueurBlanc, Joueur joueurNoir) 
@@ -161,9 +164,37 @@ namespace Tp1Echec
             // Jouer le coup
             nouveauPlateau.JouerCoup(coup);
 
+            // Si une promotion est en attente, suspendre et laisser le joueur choisir la pièce
+            if (nouveauPlateau.PromotionEnAttente)
+            {
+                _plateauEnAttentePromotion = nouveauPlateau;
+                return 2; // PromotionRequise
+            }
+
+            return FinaliserCoup(nouveauPlateau);
+
+        }
+
+        // Applique le choix de promotion du joueur et finalise le coup.
+        // codePiece : "Q" = Dame, "R" = Tour, "N" = Cavalier, "B" = Fou.
+        public int PromouvoirPion(string codePiece)
+        {
+            if (_plateauEnAttentePromotion == null) return -1;
+
+            _plateauEnAttentePromotion.PromouvoirPion(codePiece);
+
+            Plateau p = _plateauEnAttentePromotion;
+            _plateauEnAttentePromotion = null;
+
+            return FinaliserCoup(p);
+        }
+
+        // Pousse le plateau sur la pile, enregistre l'état, change le tour et vérifie la fin de partie.
+        private int FinaliserCoup(Plateau p)
+        {
             // Sauvegarder
-            _pilePlateau.Push(nouveauPlateau);
-            _pileEtatPlateau.Add(nouveauPlateau.serilizationPlateau());
+            _pilePlateau.Push(p);
+            _pileEtatPlateau.Add(p.serilizationPlateau());
 
             // Changer de tour
             _tourBlanc = !_tourBlanc;
@@ -188,7 +219,6 @@ namespace Tp1Echec
             }
 
             return 1;
-
         }
 
         //démarre la partie

@@ -84,7 +84,7 @@ namespace Tp1Echec
             {
                 int result = JeuEchec.JouerCoup(src, dst);
 
-                if (result != 1)
+                if (result <= 0)
                 {
                     string message = "";
 
@@ -158,6 +158,48 @@ namespace Tp1Echec
                     }
                 }
 
+                if (result == 2) // Promotion requise : demander la pièce au joueur
+                {
+                    string codePiece = ChoisirPiecePromotion();
+                    int resultPromotion = JeuEchec.PromouvoirPion(codePiece);
+
+                    if (resultPromotion == 1)
+                    {
+                        int etatPromotion = JeuEchec.VerifierEtatPartie();
+
+                        if (etatPromotion != ETAT_OK)
+                        {
+                            switch (etatPromotion)
+                            {
+                                case ETAT_ECHEC:
+                                    MessageBox.Show("Échec !");
+                                    break;
+
+                                case ETAT_ECHEC_MAT:
+                                    MessageBox.Show("Échec et mat !");
+                                    partieEnCours = false;
+                                    OnScoreChanged?.Invoke();
+                                    break;
+
+                                case ETAT_PAT:
+                                    MessageBox.Show("Pat !");
+                                    partieEnCours = false;
+                                    OnScoreChanged?.Invoke();
+                                    break;
+
+                                case ETAT_NULLE:
+                                    MessageBox.Show("Partie nulle (répétition) !");
+                                    partieEnCours = false;
+                                    OnScoreChanged?.Invoke();
+                                    break;
+                            }
+                        }
+
+                        RefreshFromState(JeuEchec.AfficherPlateau());
+                        moved = true;
+                    }
+                }
+
                 if (result == 1)
                 {
                     RefreshFromState(JeuEchec.AfficherPlateau());
@@ -172,6 +214,45 @@ namespace Tp1Echec
             // reset visuel
             caseSelectionnee.BorderStyle = BorderStyle.None;
             caseSelectionnee = null;
+        }
+
+        // Affiche un popup de sélection de pièce pour la promotion et retourne le code choisi.
+        // Codes : "Q" = Dame, "R" = Tour, "N" = Cavalier, "B" = Fou.
+        private string ChoisirPiecePromotion()
+        {
+            string choix = "Q"; // défaut : Dame
+
+            using (Form popup = new Form())
+            {
+                popup.Text = "Promotion du pion";
+                popup.Size = new System.Drawing.Size(320, 100);
+                popup.FormBorderStyle = FormBorderStyle.FixedDialog;
+                popup.StartPosition = FormStartPosition.CenterParent;
+                popup.MaximizeBox = false;
+                popup.MinimizeBox = false;
+
+                var boutons = new[]
+                {
+                    new Button { Text = "Dame",     Tag = "Q", Left = 10,  Top = 20, Width = 70 },
+                    new Button { Text = "Tour",     Tag = "R", Left = 90,  Top = 20, Width = 70 },
+                    new Button { Text = "Cavalier", Tag = "N", Left = 170, Top = 20, Width = 70 },
+                    new Button { Text = "Fou",      Tag = "B", Left = 250, Top = 20, Width = 50 },
+                };
+
+                foreach (var b in boutons)
+                {
+                    b.Click += (s, _) =>
+                    {
+                        choix = (string)((Button)s).Tag;
+                        popup.Close();
+                    };
+                    popup.Controls.Add(b);
+                }
+
+                popup.ShowDialog(this);
+            }
+
+            return choix;
         }
 
         private void InitialiserPieces()

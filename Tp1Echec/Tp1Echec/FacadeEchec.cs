@@ -76,6 +76,19 @@ namespace Tp1Echec
             return codeRetour;
         }
 
+        // Applique la promotion choisie par le joueur (après un retour de code 2 de JouerCoup).
+        public int PromouvoirPion(string codePiece)
+        {
+            if (_partie == null) return -1;
+
+            int codeRetour = _partie.PromouvoirPion(codePiece);
+
+            if (codeRetour == 1)
+                SauvegarderJoueurs();
+
+            return codeRetour;
+        }
+
         // Démarre une partie
         public void DemarrerPartie(string joueurBlanc, string joueurNoir)
         {

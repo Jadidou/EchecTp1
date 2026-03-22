@@ -21,6 +21,12 @@ namespace Tp1Echec
         // Réinitialisé à null au début de chaque JouerCoup.
         private (int, int)? _dernierPionDoubleAvance;
 
+        // Promotion en attente : vrai si un pion vient d'atteindre la dernière rangée
+        // et attend le choix du joueur avant d'être remplacé.
+        private bool _promotionEnAttente = false;
+        private int  _xPromotion = 0;
+        private int  _yPromotion = 0;
+
         // Constructeur
 
         public Plateau()
@@ -42,6 +48,9 @@ namespace Tp1Echec
                 }
             }
         }
+
+        // Propriété : indique si une promotion est en attente d'un choix du joueur.
+        public bool PromotionEnAttente => _promotionEnAttente;
 
         // Indexeur
 
@@ -474,14 +483,39 @@ namespace Tp1Echec
             if (piece.PeutCharger() && Math.Abs(dy) == 2 && dx == 0)
                 _dernierPionDoubleAvance = (x2, y2);
 
-            // Promotion : si un pion atteint la dernière rangée, il devient automatiquement une Dame
+            // Promotion : si un pion atteint la dernière rangée, mémoriser la position
+            // et suspendre — la pièce de remplacement sera choisie par le joueur via PromouvoirPion().
             if (piece.PeutEtrePromu())
             {
                 int rangeePromotion = piece.PieceEstBlanche ? 7 : 0;
                 if (y2 == rangeePromotion)
-                    _grillage[x2, y2] = new Dame(piece.PieceEstBlanche, false);
-
+                {
+                    _xPromotion = x2;
+                    _yPromotion = y2;
+                    _promotionEnAttente = true;
+                }
             }
+        }
+
+        // Remplace le pion en attente de promotion par la pièce choisie par le joueur.
+        // codePiece : "Q" = Dame, "R" = Tour, "N" = Cavalier, "B" = Fou.
+        public void PromouvoirPion(string codePiece)
+        {
+            if (!_promotionEnAttente) return;
+
+            bool estBlanche = _grillage[_xPromotion, _yPromotion].PieceEstBlanche;
+
+            Piece nouvellePiece;
+            switch (codePiece)
+            {
+                case "R": nouvellePiece = new Tour(estBlanche, false);     break;
+                case "N": nouvellePiece = new Cavalier(estBlanche, false); break;
+                case "B": nouvellePiece = new Fou(estBlanche, false);      break;
+                default:  nouvellePiece = new Dame(estBlanche, false);     break; // "Q" ou défaut
+            }
+
+            _grillage[_xPromotion, _yPromotion] = nouvellePiece;
+            _promotionEnAttente = false;
         }
 
         public bool VerificationEchec(bool estBlanc)
