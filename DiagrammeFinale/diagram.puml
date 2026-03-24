@@ -1,0 +1,198 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+actor Joueur
+
+participant "VuePlateau" as VuePlateau
+participant "JeuEchec" as JeuEchec
+participant "FacadeEchec" as FacadeEchec
+participant "Partie" as Partie
+participant "Plateau" as Plateau
+participant "Tour" as Tour
+participant "Piece" as Piece
+
+== Sélection de la pièce ==
+
+Joueur -> VuePlateau : clic sur case source (ex: A1)
+activate VuePlateau
+VuePlateau -> VuePlateau : caseSelectionnee = pb\nbordure Fixed3D visible
+deactivate VuePlateau
+
+== Déplacement vers la destination ==
+
+Joueur -> VuePlateau : clic sur case destination (ex: A5)
+activate VuePlateau
+
+VuePlateau -> JeuEchec : JouerCoup("A1", "A5")
+activate JeuEchec
+
+JeuEchec -> FacadeEchec : JouerCoup("A1", "A5")
+activate FacadeEchec
+
+FacadeEchec -> Partie : JouerCoup("A1", "A5")
+activate Partie
+
+create "Coup" as Coup
+Partie -> Coup : <<create>> new Coup("A1", "A5", _tourBlanc)
+activate Coup
+Coup --> Partie : coup
+deactivate Coup
+
+== Validation du coup ==
+
+Partie -> Plateau : ValiderCoup(coup)
+activate Plateau
+
+note over Plateau
+  Vérification 1 — même case → OK (A1 ≠ A5)
+  Vérification 2 — hors plateau → OK
+  Vérification 3 — pièce présente → OK
+end note
+
+Plateau -> Tour : PieceEstBlanche
+activate Tour
+Tour --> Plateau : true
+deactivate Tour
+
+note over Plateau
+  Vérification 4 — bon joueur → OK
+  Vérification 5 — destination alliée → OK (case vide)
+  Vérification 4.5 — roque → Non applicable
+  (Tour.PeutInitierRoque() = false)
+end note
+
+Plateau -> Tour : ValiderCoup(coup)
+activate Tour
+note over Tour
+  SansLimite.ValiderCoup()
+  appelle ValiderGeometrie()
+end note
+Tour -> Coup : EstOrthogonal()
+activate Coup
+Coup --> Tour : true (A1→A5 est vertical)
+deactivate Coup
+Tour --> Plateau : true
+deactivate Tour
+
+note over Plateau
+  Vérification 6 — règles du pion → Non applicable
+end note
+
+Plateau -> Tour : CauseCollision()
+activate Tour
+note over Tour : AvecCollision.CauseCollision()
+Tour --> Plateau : true
+deactivate Tour
+
+Plateau -> Plateau : CheminLibre(coup)
+note over Plateau
+  Parcourt les cases entre A1 et A5
+  Aucune pièce détectée → chemin libre
+end note
+Plateau --> Plateau : true
+
+Plateau -> Plateau : SimulerCoup(coup)
+note over Plateau
+  Clone du plateau + JouerCoup simulé
+  VerificationEchec(estTourBlanc) → false
+  (le coup ne met pas le roi en échec)
+end note
+
+Plateau --> Partie : CodeErreurCoup.OK
+deactivate Plateau
+
+== Exécution du coup ==
+
+create "Plateau (clone)" as PlateauClone
+Partie -> PlateauClone : <<create>> new Plateau(plateauActuel)
+activate PlateauClone
+
+loop pour chaque case non vide de _grillage[col, row] (0..7, 0..7)
+    PlateauClone -> Piece : Copier()
+    activate Piece
+    Piece --> PlateauClone : pièce clonée
+    deactivate Piece
+end
+
+Partie -> PlateauClone : JouerCoup(coup)
+note over PlateauClone
+  _grillage[A5] = Tour
+  _grillage[A1] = null
+  Tour.SetPieceABouge(true)
+end note
+PlateauClone --> Partie
+deactivate PlateauClone
+
+note over Partie : PromotionEnAttente = false → pas de promotion
+
+Partie -> Partie : FinaliserCoup(nouveauPlateau)
+note over Partie
+  _pilePlateau.Push(nouveauPlateau)
+  _pileEtatPlateau.Add(serialization)
+  _tourBlanc = !_tourBlanc
+  VerificationEchecMat → false
+  VerificationEchecPat → false
+  NulleParBoucle → false
+end note
+
+Partie --> FacadeEchec : 1
+deactivate Partie
+
+FacadeEchec -> FacadeEchec : SauvegarderJoueurs()
+FacadeEchec --> JeuEchec : 1
+deactivate FacadeEchec
+
+JeuEchec --> VuePlateau : 1
+deactivate JeuEchec
+
+note over VuePlateau : result > 0 → coup valide
+
+== Vérification de l'état de la partie ==
+
+VuePlateau -> JeuEchec : VerifierEtatPartie()
+activate JeuEchec
+JeuEchec -> FacadeEchec : VerifierEtatPartie()
+activate FacadeEchec
+FacadeEchec -> Partie : VerifierEtatPartie()
+activate Partie
+Partie --> FacadeEchec : CodeEtatPartie.OK (= 0)
+deactivate Partie
+FacadeEchec --> JeuEchec : 0
+deactivate FacadeEchec
+JeuEchec --> VuePlateau : 0
+deactivate JeuEchec
+
+note over VuePlateau : etat == OK → aucun message affiché
+
+== Rafraîchissement de l'affichage ==
+
+VuePlateau -> JeuEchec : AfficherPlateau()
+activate JeuEchec
+JeuEchec -> FacadeEchec : AfficherPlateau()
+activate FacadeEchec
+FacadeEchec -> Partie : AfficherPlateau()
+activate Partie
+Partie -> PlateauClone : serilizationPlateau()
+activate PlateauClone
+PlateauClone --> Partie : plateauSérialisé (string 8 lignes)
+deactivate PlateauClone
+Partie --> FacadeEchec : plateauSérialisé
+deactivate Partie
+FacadeEchec --> JeuEchec : plateauSérialisé
+deactivate FacadeEchec
+JeuEchec --> VuePlateau : plateauSérialisé
+deactivate JeuEchec
+
+VuePlateau -> VuePlateau : RefreshFromState(plateauSérialisé)
+note over VuePlateau
+  Met à jour chaque PictureBox
+  Tour disparaît de A1, apparaît en A5
+end note
+
+VuePlateau -> VuePlateau : caseSelectionnee.BorderStyle = None\ncaseSelectionnee = null
+
+VuePlateau --> Joueur : plateau rafraîchi — Tour déplacée en A5
+deactivate VuePlateau
+
+@enduml

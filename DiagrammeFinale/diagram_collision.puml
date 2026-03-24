@@ -1,0 +1,115 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+actor Joueur
+
+participant "VuePlateau" as VuePlateau
+participant "JeuEchec" as JeuEchec
+participant "FacadeEchec" as FacadeEchec
+participant "Partie" as Partie
+participant "Plateau" as Plateau
+participant "Tour" as Tour
+
+== Sélection de la pièce ==
+
+Joueur -> VuePlateau : clic sur case source (ex: A1)
+activate VuePlateau
+VuePlateau -> VuePlateau : caseSelectionnee = pb\nbordure Fixed3D visible
+deactivate VuePlateau
+
+== Déplacement vers la destination ==
+
+Joueur -> VuePlateau : clic sur case destination (ex: A5)
+activate VuePlateau
+
+VuePlateau -> JeuEchec : JouerCoup("A1", "A5")
+activate JeuEchec
+
+JeuEchec -> FacadeEchec : JouerCoup("A1", "A5")
+activate FacadeEchec
+
+FacadeEchec -> Partie : JouerCoup("A1", "A5")
+activate Partie
+
+create "Coup" as Coup
+Partie -> Coup : <<create>> new Coup("A1", "A5", _tourBlanc)
+activate Coup
+Coup --> Partie : coup
+deactivate Coup
+
+== Validation du coup ==
+
+Partie -> Plateau : ValiderCoup(coup)
+activate Plateau
+
+note over Plateau
+  Vérification 1 — même case → OK (A1 ≠ A5)
+  Vérification 2 — hors plateau → OK
+  Vérification 3 — pièce présente → OK
+end note
+
+Plateau -> Tour : TourEstBlanche
+activate Tour
+Tour --> Plateau : true
+deactivate Tour
+
+note over Plateau
+  Vérification 4 — bon joueur → OK
+  Vérification 5 — destination alliée → OK (case vide)
+  Vérification 4.5 — roque → Non applicable
+  (Tour.PeutInitierRoque() = false)
+end note
+
+Plateau -> Tour : ValiderCoup(coup)
+activate Tour
+note over Tour
+  SansLimite.ValiderCoup()
+  appelle ValiderGeometrie()
+end note
+Tour -> Coup : EstOrthogonal()
+activate Coup
+Coup --> Tour : true (A1→A5 est vertical)
+deactivate Coup
+Tour --> Plateau : true
+deactivate Tour
+
+note over Plateau
+  Vérification 6 — règles du pion → Non applicable
+end note
+
+Plateau -> Tour : CauseCollision()
+activate Tour
+note over Tour : AvecCollision.CauseCollision()
+Tour --> Plateau : true
+deactivate Tour
+
+Plateau -> Plateau : CheminLibre(coup)
+note over Plateau
+  Parcourt les cases entre A1 et A5
+  Détecte une pièce sur A3 → chemin bloqué
+end note
+Plateau --> Plateau : false
+
+Plateau --> Partie : CodeErreurCoup.Collision (= 7)
+deactivate Plateau
+
+== Rejet du coup ==
+
+Partie --> FacadeEchec : -(int)Collision = -7
+deactivate Partie
+
+FacadeEchec --> JeuEchec : -7
+deactivate FacadeEchec
+
+JeuEchec --> VuePlateau : -7
+deactivate JeuEchec
+
+note over VuePlateau : result <= 0 → switch(-result = 7)
+
+VuePlateau -> Joueur : MessageBox.Show("Une pièce bloque le chemin.")
+
+VuePlateau -> VuePlateau : caseSelectionnee.BorderStyle = None\ncaseSelectionnee = null
+deactivate VuePlateau
+
+@enduml
