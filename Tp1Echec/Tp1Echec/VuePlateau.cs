@@ -20,6 +20,8 @@ namespace Tp1Echec
         PictureBox caseSelectionnee = null; //< Case actuellement sélectionnée par l’utilisateur.
         VuePrincipale _principale; //< Référence vers la vue principale (menu, score, boutons).
 
+        public VuePrincipale VuePrincipale { get { return _principale;  } set { _principale = value; } }
+
 
         //proprietés
         public bool partieEnCours { get; private set; } = false; //< Indique si une partie est en cours.
@@ -28,9 +30,13 @@ namespace Tp1Echec
 
         // @brief Initialise la vue du plateau.
         // @param principale Référence vers la vue principale.
-        public VuePlateau(VuePrincipale principale)
+        public VuePlateau(VuePrincipale principale) : this()
         {
             _principale = principale;
+        }
+
+        public VuePlateau()
+        {
             InitializeComponent();
             MakeSquaresTransparent();
             AttachEvents();
@@ -171,6 +177,7 @@ namespace Tp1Echec
                             partieEnCours = false;
                             _principale.ActiverBoutonsPartie();
                             DesactiverBoutonsPlateau();
+                            _principale.ActiverBoutonsPartie();
                             OnScoreChanged?.Invoke();
                             break;
 
@@ -179,6 +186,7 @@ namespace Tp1Echec
                             partieEnCours = false;
                             _principale.ActiverBoutonsPartie();
                             DesactiverBoutonsPlateau();
+                            _principale.ActiverBoutonsPartie();
                             OnScoreChanged?.Invoke();
                             break;
 
@@ -187,6 +195,7 @@ namespace Tp1Echec
                             partieEnCours = false;
                             _principale.ActiverBoutonsPartie();
                             DesactiverBoutonsPlateau();
+                            _principale.ActiverBoutonsPartie();
                             OnScoreChanged?.Invoke();
                             break;
                     }
@@ -412,6 +421,8 @@ namespace Tp1Echec
 
             JeuEchec.AbandonnerPartie();
             MessageBox.Show("La partie a été abandonnée.");
+            DesactiverBoutonsPlateau();
+            _principale.ActiverBoutonsPartie();
             OnScoreChanged?.Invoke();
             partieEnCours = false;
 

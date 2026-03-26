@@ -30,6 +30,7 @@ namespace Tp1Echec
 
             // Associe la vue plateau existante (UserControl)
             _plateau = vuePlateau1;
+            _plateau.VuePrincipale = this;
 
             // Met à jour la liste des joueurs et les ComboBox lorsqu’un score change
             _plateau.OnScoreChanged += vueJoueur1.ChargerListe;
@@ -72,7 +73,7 @@ namespace Tp1Echec
                 JeuEchec.DemarrerPartie(joueurBlanc, joueurNoir);
                 _plateau.DemarrerPartie();
                 JeuEchec.AfficherPlateau();
-                btnDemarrerPartie.Enabled = false;
+                DesactiverBoutonsPartie();
                 _plateau.ActiverBoutonsPlateau();
                 MessageBox.Show("La partie a commencé !");
             }
@@ -86,7 +87,7 @@ namespace Tp1Echec
         // @brief Désactive les boutons liés à la partie
         public void DesactiverBoutonsPartie()
         {
-                btnDemarrerPartie.Enabled = true;
+                btnDemarrerPartie.Enabled = false;
         }
 
         // @brief Active les boutons liés à la partie
